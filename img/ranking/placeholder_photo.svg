@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260" viewBox="0 0 400 260" role="img" aria-label="職業イメージ写真（仮）">
+  <!-- ============================================================
+       仮画像：ランキングの職業写真プレースホルダー
+       実写真ができたら同名 or 任意の画像に差し替えてください
+       ============================================================ -->
+  <rect width="400" height="260" fill="#e6ebf2"/>
+  <g fill="#b9c4d4">
+    <circle cx="200" cy="108" r="34"/>
+    <path d="M132 200c0-37 30-58 68-58s68 21 68 58v14H132z"/>
+  </g>
+  <text x="200" y="242" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#8a99ad">職業イメージ（仮）</text>
+</svg>

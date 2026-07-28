@@ -1,0 +1,386 @@
+/* ==========================================================================
+   よくあるご質問（FAQ）ページ 専用スタイル
+   ・トークン / ヘッダー / フッター / フローターは css/style.css を併読
+   ・本ファイルは FAQ 本体（イントロ・クイックナビ・セクション・アコーディオン）を担当
+   ・ブレークポイントはトップページに合わせて 1100px / 640px
+   ========================================================================== */
+
+/* ページ背景（グレー） */
+body { background: #F3F3F2; }
+
+/* データ取得失敗時のエラー表示 */
+.faq-error { text-align: center; color: var(--c-text-weak, #6c757d); padding: 48px 0; }
+
+/* 本文コンテナ */
+.faq-main { padding: 28px 0 90px; }   /* PC：最終セクション → フッター 90px（末尾セクションの下マージンは0） */
+
+/* パンくず */
+.faq-breadcrumb {
+  /* コンテナ左右余白より外側（＝ページ左端寄り 約25px）へ寄せる（ランキングページと同様） */
+  margin-left: calc(25px - clamp(24px, 8vw, 96px));
+  font-size: 13px;
+  color: var(--c-text-weak, #6c757d);
+  margin-bottom: 14px;
+}
+.faq-breadcrumb a { color: var(--c-blue-link, #1b62c9); text-decoration: none; }
+.faq-breadcrumb a:hover { text-decoration: underline; }
+.faq-breadcrumb .sep { margin: 0 8px; color: #adb5bd; }
+
+/* タイトル＋説明 */
+.faq-title {
+  display: flex; align-items: center; gap: 14px;
+  color: #000;
+  font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 60px;   /* 120% */
+  margin: 0 0 40px;    /* タイトル → 説明文 40px */
+}
+.faq-title__icon {
+  flex: 0 0 auto;
+  width: 87px; height: 87px; border-radius: 50%;   /* PC：87×87の青い円 */
+  background: var(--c-primary);
+  display: inline-flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+/* 円の中の「？」画像（円に対して 45/87 ≒ 51.72% の比率。PC=45px / 円が縮んでも同比率） */
+.faq-title__icon img { width: 51.72%; height: 51.72%; display: block; }
+.faq-lead { font-size: 16px; line-height: 24px; font-weight: 400; color: var(--c-text, #333); margin: 0 0 40px; }
+
+/* --- 上部クイックナビ（各セクションへジャンプ）：1枚の白いボックスに横並び --- */
+.faq-quicknav {
+  display: flex; align-items: center;
+  min-height: 80px;             /* ボックス高さ80px */
+  padding: 16px 32px;           /* 上下16px */
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(17, 45, 92, .05);
+  margin-bottom: 40px;
+}
+.faq-quicknav ul {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 12px 36px;               /* リンク間の間隔 */
+  list-style: none; margin: 0; padding: 0; width: 100%;
+}
+.faq-quicknav a {
+  display: inline-flex; align-items: center; gap: 16px;   /* 矢印と文字の間隔 16px */
+  padding: 0;
+  background: none; border: none; border-radius: 0;
+  font-size: 16px; font-weight: 400; color: var(--c-text, #212529);
+  text-decoration: none;
+  line-height: 24px;
+}
+.faq-quicknav a::before {
+  content: ""; flex: 0 0 auto;
+  width: 22px; height: 22px;
+  background: url(../img/FAQ/yajirusi.png) center / contain no-repeat;   /* 青丸＋白い矢印 */
+}
+.faq-quicknav a:hover { color: var(--c-primary); }
+.faq-quicknav a:hover { border-color: var(--c-primary); color: var(--c-primary); }
+
+/* --- セクション（白いボックスで囲む。中に各質問ボックスが並ぶ） --- */
+.faq-sec {
+  scroll-margin-top: 160px;   /* クイックナビでジャンプ時、固定ヘッダーにタイトルが隠れないように */
+  background: #fff;
+  border-radius: 16px;
+  padding: 8px 55px 24px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 12px rgba(17, 45, 92, .05);
+}
+.faq-sec:last-child { margin-bottom: 0; }   /* 末尾（お問い合わせ）の下マージンを消す（フッターまでは .faq-main の下パディングで確保） */
+.faq-sec__title {
+  display: flex; align-items: flex-end;
+  color: #221A16;
+  font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  padding: 32px 0 0;
+  margin: 0 0 30px;
+}
+/* 文字の下は青線、残りはグレー線 */
+.faq-sec__title-text {
+  flex: 0 0 auto;
+  padding-bottom: 14px;
+  border-bottom: 3px solid var(--c-primary);
+}
+.faq-sec__line {
+  flex: 1 0 0;
+  height: 3px;
+  background: #D9D9D9;
+}
+/* セクションタイトルのSP用改行（PCでは無効） */
+.faq-sp-br { display: none; }
+
+/* --- アコーディオン一覧 --- */
+.faq-list { list-style: none; margin: 0; padding: 0; }
+.faq-item {
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: 10px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+/* 質問（開閉ボタン） */
+.faq-item__q {
+  position: relative;
+  display: flex; align-items: center; gap: 15px;   /* 番号「Q3.」と質問文の間隔 15px */
+  width: 100%;
+  padding: 21px 48px;      /* 上下21px：1行=68px / 2行=92px（枠線1px×2込み・1行ごとに+24px） */
+  background: none; border: none; cursor: pointer;
+  text-align: left;
+}
+.faq-item__no {
+  flex: 0 0 auto;
+  min-width: 46px;
+  color: #0568D3;
+  text-align: left;
+  font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;   /* 120% */
+}
+.faq-item__label {
+  flex: 1 1 auto;
+  color: #221A16;
+  font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;   /* 120% */
+}
+/* 右端の開閉インジケーター（下向き▼→上向き▲） */
+.faq-item__toggle {
+  flex: 0 0 auto;
+  width: 10px; height: 10px;   /* 文字との間隔は .faq-item__q の gap:15px で確保 */
+  border-right: 2px solid var(--c-primary);
+  border-bottom: 2px solid var(--c-primary);
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform .2s;
+}
+.faq-item.is-open .faq-item__toggle { transform: rotate(225deg); }
+/* 開いた設問の下に青いライン（Q番号〜矢印までの幅。左右パディング分は入れない） */
+.faq-item.is-open .faq-item__q::after {
+  content: "";
+  position: absolute; left: 48px; right: 48px; bottom: 0;   /* 質問の左右余白に合わせ、番号〜矢印の幅に */
+  height: 1px; background: #CDE1F6;
+}
+
+/* 回答（アコーディオン：grid-rows で滑らかに開閉） */
+.faq-item__a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .25s ease;
+}
+.faq-item.is-open .faq-item__a { grid-template-rows: 1fr; }
+.faq-item__a-inner { overflow: hidden; min-height: 0; }
+/* 回答は「Q番号」分を空けて、質問文の左に揃える（Aアイコンは非表示） */
+.faq-item__a-inner {
+  display: block;
+  padding: 0 48px 0 109px;   /* 左は 余白48 + 番号46 + 間隔15 で質問文に揃える */
+}
+.faq-item.is-open .faq-item__a-inner { padding: 16px 48px 20px 109px; }
+.faq-item__amark { display: none; }
+.faq-item__atext {
+  color: #6A7276;
+  font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;   /* 約141% */
+}
+/* 回答内の表 */
+.faq-item__atext table,
+.faq-item__atext .faq-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16px 0 6px;
+  font-size: 15px;
+  border: 1px solid #D6DEE8;   /* 外枠を少し濃く */
+}
+.faq-item__atext th,
+.faq-item__atext td {
+  border: 1px solid #E1E7EF;   /* 内側の罫線は淡く */
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.85;           /* 行間を広げて読みやすく */
+  overflow-wrap: anywhere;     /* 長い語でもはみ出さない */
+}
+.faq-item__atext th {
+  background: var(--c-bg-blue);
+  font-weight: 700;
+}
+/* 1列目（見出しセル）はグレー地。PCは折り返さず、幅も内容ぴったりに */
+.faq-item__atext td:first-child {
+  background: #F7F8FA;
+  font-weight: 700;
+  white-space: nowrap;
+  width: 1%;                   /* 内容幅ぴったり → 説明列を最大化 */
+}
+/* 絞り込み表（3列）の列幅：左を狭く・中央を適度に・右を広く（PCのみ） */
+@media (min-width: 640px) {
+  .faq-item__atext .faq-table--cols3 { table-layout: fixed; }
+  .faq-item__atext .faq-table--cols3 td:first-child { width: 18%; white-space: normal; }   /* 左列：狭く（見出しは折り返し可） */
+  .faq-item__atext .faq-table--cols3 td:nth-child(2) { width: 46%; }                        /* 中央列：適度に */
+  /* 右列は残り（約36%）＝広く */
+}
+
+/* 回答内の小見出し（■組み合わせ検索 など） */
+.faq-item__atext .faq-subhead {
+  font-size: 17px; font-weight: 700; color: #221A16;
+  margin: 20px 0 8px;
+}
+/* 回答内の箇条書き */
+.faq-item__atext .faq-ul { margin: 8px 0 4px; padding-left: 0; list-style: none; }
+.faq-item__atext .faq-ul li { margin: 3px 0; padding-left: 1em; text-indent: -1em; }
+.faq-item__atext .faq-ul li::before { content: "・"; }
+/* 回答内の注記 */
+.faq-item__atext .faq-note { font-size: 15px; color: var(--c-text-weak, #6c757d); margin: 10px 0 0; }
+/* 回答内リンク */
+.faq-item__atext a { color: var(--c-blue-link, #1b62c9); text-decoration: underline; }
+/* 回答内の「ラベル：値（複数行）」の整列（推奨ブラウザ等） */
+.faq-env { display: flex; gap: 24px; margin-top: 14px; }
+.faq-env__label { flex: 0 0 auto; }
+.faq-env__val { flex: 1 1 auto; }
+
+/* --- お問い合わせ窓口 --- */
+.faq-contact {
+  background: none;
+  padding: 4px 0 0;
+}
+.faq-contact__lead { font-size: 15px; color: var(--c-text, #333); margin: 0 0 12px; }
+.faq-contact__mail { font-size: 15px; margin: 0 0 6px; }
+.faq-contact__mail a { color: var(--c-blue-link, #1b62c9); font-weight: 700; }
+.faq-contact__manual { font-size: 14px; color: var(--c-text-weak, #6c757d); margin: 0; }
+.faq-contact__manual a { color: var(--c-blue-link, #1b62c9); }
+
+/* ==========================================================================
+   レスポンシブ（〜1100px）
+   ========================================================================== */
+@media (max-width: 1150px) {
+  .faq-title { font-size: 26px; }
+  .faq-title__icon { width: 35px; height: 35px; }   /* SP／タブレット：35×35の青い円（画像は51.72%比率のまま） */
+  .faq-sec { scroll-margin-top: 70px; }   /* コンパクトヘッダー分 */
+  /* 1100px以下はコンテナ余白が16pxになるため、負マージンの寄せを解除（画面外への見切れ防止） */
+  .faq-breadcrumb { margin-left: 0; }
+}
+
+/* ==========================================================================
+   スマホ（〜640px）
+   ========================================================================== */
+@media (max-width: 640px) {
+  .faq-main { padding: 30px 0 30px; }              /* ヘッダー → タイトル 30px／最終セクション → フッター 30px */
+  .faq-sec:last-child { margin-bottom: 0; }        /* 末尾（お問い合わせ）の下マージンを消し、フッターまで30pxに */
+  .faq-breadcrumb { display: none; }               /* SPはパンくず非表示（デザインに合わせる） */
+  .faq-title {
+    justify-content: flex-start;   /* 左揃え */
+    text-align: left;
+    color: #221A16;
+    font-size: 25px;
+    line-height: 150%;         /* 37.5px */
+    gap: 10px;
+    margin-bottom: 20px;       /* タイトル → リード 20px */
+  }
+  .faq-title__icon { width: 35px; height: 35px; }
+  .faq-lead {
+    color: #221A16;
+    font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%;         /* 24px */
+    margin-bottom: 30px;       /* リード → ボックス 30px */
+  }
+
+  /* クイックナビ：白ボックス内で縦積み（上下16px・左右20px・行間5px・区切り線なし） */
+  .faq-quicknav { display: block; min-height: 0; padding: 16px 20px; margin-bottom: 30px; }   /* ボックス → セクション 30px */
+  .faq-quicknav ul { flex-direction: column; align-items: stretch; gap: 5px; }
+  .faq-quicknav a {
+    width: 100%;
+    padding: 0;
+    color: #221A16;
+    font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;   /* 150% */
+  }
+  .faq-quicknav a::before { width: 16px; height: 16px; }   /* アイコン 16×16 */
+  .faq-quicknav li:not(:last-child) a { border-bottom: none; }
+
+  .faq-sec { margin-bottom: 30px; padding: 0 20px 16px; border-radius: 32px; }
+  .faq-sec__title {
+    font-size: 22px;
+    line-height: 150%;      /* 33px */
+    padding: 32px 0 0;      /* ボックス上端 → タイトル 32px */
+    margin-bottom: 12px;
+  }
+  .faq-sec__title-text { padding-bottom: 10px; }
+  /* タイトルをSP版のみ指定位置で改行 */
+  .faq-sp-br { display: inline; }
+
+  /* 設問ボックス間の縦間隔（SP） */
+  .faq-item { margin-bottom: 15px; }
+
+  /* 質問：番号を上、本文を下の2段にせず、番号インラインで詰める */
+  .faq-item__q { padding: 14px 16px; gap: 8px; align-items: flex-start; min-height: 0; }
+  .faq-item.is-open .faq-item__q::after { left: 16px; right: 16px; }
+  .faq-item__no { min-width: 0; font-size: 16px; }
+  .faq-item__label {
+    color: #221A16;
+    font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;   /* 150% */
+  }
+  .faq-item__toggle { margin-top: 4px; }
+
+  .faq-item__a-inner { padding: 0 20px 0 20px; }              /* 回答の左インデント 20px */
+  .faq-item.is-open .faq-item__a-inner { padding: 10px 20px 16px 20px; }
+  .faq-item__amark { width: 26px; height: 26px; font-size: 14px; }
+  .faq-item__atext {
+    color: #6A7276;
+    font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;   /* 約157% */
+  }
+  /* 回答内の表（SP：狭幅でも読めるように詰める） */
+  .faq-item__atext table,
+  .faq-item__atext .faq-table { font-size: 13px; margin: 12px 0 4px; }
+  .faq-item__atext th,
+  .faq-item__atext td { padding: 8px 9px; line-height: 1.7; }
+  /* SPは1列目も折り返して収める（横はみ出し防止） */
+  .faq-item__atext td:first-child { white-space: normal; width: auto; }
+  /* 絞り込み表（3列）SP：中央列を狭く・右（該当値）を広めにして1文字折り返しを防ぐ */
+  .faq-item__atext .faq-table--cols3 { table-layout: fixed; }
+  .faq-item__atext .faq-table--cols3 td { padding: 8px 7px; }
+  .faq-item__atext .faq-table--cols3 td:first-child { width: 22%; }   /* 左列（見出し） */
+  .faq-item__atext .faq-table--cols3 td:nth-child(2) { width: 43%; }  /* 中央列（説明） */
+  /* 右列は残り（約35%）＝該当値を少し狭く */
+
+  /* --- お問い合わせ窓口（SP） --- */
+  #faq-contact .faq-sec__title { margin-bottom: 23px; }   /* タイトル → 本文 23px */
+  .faq-contact { padding: 0; }
+  .faq-contact__lead,
+  .faq-contact__mail,
+  .faq-contact__manual {
+    color: #221A16;
+    font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;   /* 150% */
+  }
+  .faq-contact__lead { margin: 0 0 24px; }        /* 本文 → メール 24px（1行アキ） */
+  .faq-contact__mail { margin: 0; }
+  .faq-contact__manual { margin: 0; }
+  .faq-contact__mail a,
+  .faq-contact__manual a {
+    color: #0568D3;
+    font-weight: 400;
+    text-decoration: underline;
+  }
+}

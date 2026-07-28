@@ -1,0 +1,248 @@
+/* ==========================================================================
+   job tag 職業アクセスランキング ページ 専用スタイル
+   ・トークン / リセット / フッター / フローターは css/style.css を併読して共有
+   ・本ファイルは「新ヘッダー（3段）」「パンくず」「本体（タブ・カード・ページャ）」
+     「レスポンシブ」を担当
+   ・ブレークポイントはトップページに合わせて 1100px / 640px
+   ========================================================================== */
+
+/* ページ背景（ランキングページのみ上書き） */
+body { background: rgba(246, 246, 246, 1); }
+
+/* ==========================================================================
+   パンくず
+   ========================================================================== */
+.rk-breadcrumb {
+  margin-top: 28px;      /* ナビボックス → パンくず 28px */
+  margin-bottom: 15px;   /* パンくず → タイトル 15px */
+  /* コンテナ左右余白より外側（＝ページ左端寄り 約25px）へ寄せる */
+  margin-left: calc(25px - clamp(24px, 8vw, 80px));
+  font-size: 13px;
+  color: var(--c-text-weak, #6c757d);
+}
+.rk-breadcrumb a { color: var(--c-blue-link, #1b62c9); text-decoration: none; }
+.rk-breadcrumb a:hover { text-decoration: underline; }
+.rk-breadcrumb .sep { margin: 0 8px; color: #adb5bd; }
+
+/* ==========================================================================
+   本体
+   ========================================================================== */
+.rk-section { padding-bottom: 80px; }
+.rk-title {
+  color: #000;
+  font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 60px;   /* 120% */
+  margin: 0 0 12px;    /* 上はパンくずのmargin-bottomで15px確保 */
+}
+.rk-lead {
+  color: #000;
+  font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px;   /* 166.667% */
+  margin: 0 0 40px;    /* リード → パネル 40px */
+}
+
+/* 白パネル */
+.rk-panel {
+  background: var(--c-surface, #fff);
+  border-radius: var(--radius, 16px);
+  padding: 48px 40px 40px;   /* パネル内側の左右余白 40px */
+  box-shadow: none;
+}
+
+/* 本文コンテナの左右ガター（パネル外の薄いグレー部分）を 96px → 80px に */
+main > .container { padding-inline: clamp(24px, 8vw, 80px); }
+
+/* --- タブ --- */
+.rk-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 40px;
+}
+.rk-tabs__btn {
+  position: relative;
+  padding: 8px 28px;
+  background: none;
+  border: none;
+  color: #000;
+  font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;   /* 150% */
+  cursor: pointer;
+}
+.rk-tabs__btn.is-active { color: #000; }   /* アクティブは下線で強調（文字スタイルは共通の太字） */
+.rk-tabs__btn.is-active::after {
+  content: "";
+  position: absolute; left: 28px; right: 28px; bottom: -8px;
+  height: 4px; border-radius: 3px; background: var(--c-yellow, #FFC000);
+}
+.rk-tabs__sep { color: var(--c-border); }
+
+/* --- カードグリッド（3列） --- */
+.rk-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 24px;   /* 行(縦)40px / 列(横)24px で統一 */
+}
+.rk-card__link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+.rk-card__photo {
+  display: block;
+  border-radius: 6px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #eef1f4;
+}
+.rk-card__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.rk-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+.rk-card__icon { flex: 0 0 auto; display: inline-flex; }
+.rk-card__icon .ico { width: 22px; height: 22px; }
+.rk-c--1 { color: #D4AF37; }   /* 金（トップ画面と同色） */
+.rk-c--2 { color: #BDC3C9; }   /* 銀（トップ画面と同色） */
+.rk-c--3 { color: #EC963E; }   /* 銅（トップ画面と同色） */
+.rk-c--check { color: var(--c-primary); }   /* 4位以降＝青 */
+
+.rk-card__rank {
+  flex: 0 0 auto;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  /* 色は順位クラス（rk-c--1/2/3 = 金銀銅, rk-c--check = 青）で付与 */
+}
+/* 変動アイコン（上昇=#FFC000で上向き回転 / 下降=#B6B6B6で下向き / 変動なし=ダッシュ）※トップと同配色・同挙動 */
+.rk-move { flex: 0 0 auto; display: inline-flex; align-items: center; font-size: 20px; }
+.rk-move .ico { width: 1em; height: 1em; fill: currentColor; }
+.rk-move.-up   { color: #FFC000; }
+.rk-move.-up .ico { transform: rotate(180deg); }
+.rk-move.-down { color: #B6B6B6; }
+.rk-move.-stay { color: #B6B6B6; opacity: .8; }
+
+.rk-card__title {
+  flex: 1 1 auto;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--c-text, #212529);
+  margin-left: 2px;
+}
+.rk-card__link:hover .rk-card__title { text-decoration: underline; }
+.rk-card__link:hover .rk-card__photo img { opacity: .92; }
+
+/* --- ページネーション --- */
+.rk-pager {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 44px;
+}
+/* 数字：テキストのみ（枠・塗りなし）。アクティブは青文字＋青い下線で強調 */
+.rk-pager__num {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 21px; height: 38px;
+  padding: 0 6px;
+  border: none;
+  background: none;
+  color: #333;
+  font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  cursor: pointer;
+}
+.rk-pager__num:hover { color: var(--c-primary); }
+.rk-pager__num.is-active { color: var(--c-primary); }   /* アクティブ＝青 */
+.rk-pager__num.is-active::after {
+  content: "";
+  position: absolute; left: 50%; bottom: 2px; transform: translateX(-50%);
+  width: 30px;
+  border-bottom: 1.5px solid var(--c-primary);   /* 幅30px・1.5pxの青い下線 */
+}
+/* 前へ／次へ：青い丸枠のアウトラインボタン 38×38 */
+.rk-pager__nav {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--c-primary);
+  background: #fff;
+  color: var(--c-primary);
+  cursor: pointer;
+}
+.rk-pager__nav .ico { width: 14px; height: 14px; }
+.rk-pager__ellipsis { padding: 0 4px; color: var(--c-text-weak, #6c757d); }
+
+/* 読み込み中 / 取得失敗 */
+.rk-loading,
+.rk-error { text-align: center; color: var(--c-text-weak, #6c757d); padding: 40px 0; list-style: none; }
+
+/* ==========================================================================
+   レスポンシブ（〜1100px：2列 / ヘッダー簡素化）
+   ========================================================================== */
+@media (max-width: 1150px) {
+  .rk-list { grid-template-columns: repeat(2, 1fr); }
+  .rk-panel { padding: 32px 24px 28px; }
+  .rk-title { font-size: 28px; }}
+
+/* ==========================================================================
+   スマホ（〜640px）：1列 / ヘッダーはロゴ+検索+メニューに集約
+   ========================================================================== */
+@media (max-width: 1070px) {
+  /* --- 本体（SPは縦間隔を詰めて整える） --- */
+  .rk-section { padding-bottom: 48px; }
+  .rk-breadcrumb { margin-top: 14px; margin-bottom: 4px; }   /* パンくず→タイトルを詰める */
+  .rk-title { font-size: 25px; line-height: 1.3; margin: 0 0 6px; }
+  .rk-lead { font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
+  .rk-panel { padding: 24px 16px 24px; border-radius: 12px; }
+
+  .rk-tabs { margin-bottom: 28px; }
+  .rk-tabs__btn { padding: 6px 14px; font-size: 15px; }
+  .rk-tabs__btn.is-active::after { left: 14px; right: 14px; }
+
+  /* 2列は上の @media (max-width:1150px) に集約（ここでは間隔だけ調整）。640px未満は下で1列 */
+  .rk-list { gap: 24px; }
+  /* SPは画像メイン（本家風）：大きな画像 → トロフィー・順位・上下 → 職業名 の縦積み */
+  .rk-card__link { flex-direction: column; align-items: stretch; gap: 0; }
+  .rk-card__photo { flex: none; width: 100%; margin: 0; aspect-ratio: 16 / 9; border-radius: 8px; }
+  .rk-card__meta { flex-wrap: wrap; align-items: center; margin-top: 5px; gap: 8px; }
+  .rk-card__title { flex: 1 1 100%; margin-left: 0; margin-top: 0px; font-size: 16px; }
+
+  .rk-pager { margin-top: 32px; gap: 8px; }
+  .rk-pager__num, .rk-pager__nav { width: 30px; height: 30px; font-size: 14px; }
+}
+
+/* ==========================================================================
+   スマホ（〜640px未満）：1列（640px以上は2列）
+   ========================================================================== */
+@media (max-width: 639.98px) {
+  .rk-list { grid-template-columns: 1fr; }
+}

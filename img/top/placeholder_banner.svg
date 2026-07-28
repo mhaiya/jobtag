@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="170" viewBox="0 0 280 170" role="img" aria-label="関連サイトバナー（仮）">
+  <!-- ============================================================
+       仮画像：LINKS（関連サイト）のバナープレースホルダー
+       各関連サイトのバナー画像に差し替えてください
+       ============================================================ -->
+  <rect width="280" height="170" fill="#eef1f5"/>
+  <rect x="1" y="1" width="278" height="168" fill="none" stroke="#d6dce4" stroke-width="1"/>
+  <rect x="70" y="58" width="140" height="30" rx="4" fill="#c7cfdb"/>
+  <text x="140" y="120" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#8a99ad">バナー画像（仮）</text>
+</svg>

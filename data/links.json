@@ -1,0 +1,13 @@
+{
+  "note": "関連サイト（LINKS）のバナー。追加/削除はこの items 配列を編集するだけ。label=タイトル / image=バナー画像パス（300×169推奨）/ url=リンク先。",
+  "items": [
+    { "label": "ハローワーク",                   "image": "img/assets/placeholder_banner.svg", "url": "#" },
+    { "label": "ジョブ・カードがつくれる、わかる", "image": "img/assets/placeholder_banner.svg", "url": "#" },
+    { "label": "人材サービス",                   "image": "img/assets/placeholder_banner.svg", "url": "#" },
+    { "label": "社会人の大学等での学びを応援",    "image": "img/assets/placeholder_banner.svg", "url": "#" },
+    { "label": "マイジョブ・カード",             "image": "img/assets/placeholder_banner.svg", "url": "#" },
+    { "label": "職業能力評価基準",               "image": "img/assets/placeholder_banner.svg", "url": "#" },
+    { "label": "キャリアマップ",                 "image": "img/assets/placeholder_banner.svg", "url": "#" },
+    { "label": "マナパス",                       "image": "img/assets/placeholder_banner.svg", "url": "#" }
+  ]
+}

@@ -1,0 +1,2077 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   job tag TOP リニューアル – スタイルシート
+   構成:
+     00. デザイントークン（CSS変数）
+     01. リセット & ベース
+     02. 共通レイアウト（コンテナ / セクション見出し）
+     03. 共通コンポーネント（ボタン / カード）
+     04. ユーティリティバー
+     05. ヘッダー（ロゴ / 検索窓 / マイリスト / メニュー / ログイン）
+     06. グローバルナビ
+     07. クイックリンクバー
+     08. job tag とは（ヒーロー）
+     09. 使ってみよう！
+     10. 職業を調べてみよう！
+     11. 自己診断ツール
+     12. 企業の方向けツール
+     13. RANKING（職業アクセスランキング）
+     14. NEWS
+     15. タグしつじ ナビゲート
+     16. LINKS（関連サイト）
+     17. フッター
+     18. 追従UI（PAGE TOP / アンケート）
+     19. レスポンシブ（PC優先 + 簡易対応）
+   ========================================================================== */
+
+
+/* ==========================================================================
+   00. デザイントークン（CSS変数）
+   ── モックアップから抽出した配色・余白・角丸を一元管理
+   ========================================================================== */
+:root {
+  /* --- ブランドブルー系 --- */
+  --c-primary:     #0568D3;   /* ブランド基調青（Figmaの --primary） */
+  --c-blue:        #0b5fd6;   /* 基調ブルー（ボタン・見出し） */
+  --c-blue-deep:   #0146a8;   /* 濃いブルー（ホバー等） */
+  --c-blue-ranking:#0568D3;   /* RANKINGセクション背景 */
+  --c-blue-link:   #1b62c9;   /* テキストリンク */
+
+  /* --- 背景・面 --- */
+  --c-header-bg:   #E6F0FB;   /* ヘッダー帯の薄い青 */
+  --c-header-line: #0568D3;   /* ヘッダー帯の境界線（青） */
+  --c-nav-divider: #9CBCE5;   /* グローバルナビの区切り縦線 */
+  --c-bg-blue:     #d9e8f8;   /* ページの水色背景 */
+  --c-bg-gray:     #f4f5f6;   /* グレー背景セクション */
+  --c-surface:     #ffffff;   /* 白面 */
+  --c-surface-alt: #f7f9fc;   /* うっすら水色の面（カード内） */
+  --c-chip-blue:   #e5eef9;   /* 検索カテゴリカードの薄青 */
+
+  /* --- アクセント（使ってみよう！の3色 等） --- */
+  --c-orange: #f7a417;   /* 学生・在職者・求職者 */
+  --c-teal:   #0e97b8;   /* 企業の方 */
+  --c-pink:   #ea4c8a;   /* キャリア支援 */
+  --c-yellow: #f7b500;   /* ランキング番号・タブ下線 */
+  --c-red:    #e60012;   /* マイリスト星・YouTube */
+
+  /* --- テキスト --- */
+  --c-text:      #2b2b2b;
+  --c-text-weak: #6a7383;
+
+  /* --- 罫線 --- */
+  --c-border:      #d9dee6;
+  --c-border-blue: #1e5fd0;   /* カードの青枠 */
+
+  /* --- フッター --- */
+  --c-footer:       #3a3a3a;
+  --c-footer-deep:  #2b2b2b;
+  --c-footer-text:  #d8d8d8;
+
+  /* --- レイアウト --- */
+  --radius:    16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* --- 影 --- */
+  --shadow-pop:  0 6px 20px rgba(17, 45, 92, .12);
+
+  /* --- フォント（Noto Sans CJK JP に統一。未読込時のみ日本語ゴシックへフォールバック） --- */
+  --font-jp: "Noto Sans CJK JP", "Noto Sans JP",
+             "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic",
+             "YuGothic", Meiryo, system-ui, sans-serif;
+}
+
+
+/* ==========================================================================
+   01. リセット & ベース
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* スクリーンリーダー専用（視覚的に非表示・レイアウトに影響なし） */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0);
+  white-space: nowrap; border: 0;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+/* 横スクロール防止。hidden はスクロールコンテナを作り position:sticky を無効化するため clip を使用（ヘッダー固定を維持） */
+html, body { overflow-x: hidden; overflow-x: clip; max-width: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-jp);
+  color: var(--c-text);
+  background: var(--c-bg-blue);
+  line-height: 1.7;
+  letter-spacing: .02em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; height: auto; vertical-align: middle; }
+
+a { color: inherit; text-decoration: none; }
+a:hover { opacity: .85; }
+
+/* インラインSVGアイコンの基本サイズ（親のcolorを継承） */
+svg.ico { display: inline-block; width: 1em; height: 1em; fill: none; vertical-align: -.14em; flex: none; }
+/* ボタン等のチェブロンは少し小さめに */
+.chev.ico { width: .9em; height: .9em; }
+
+ul, li { list-style: none; margin: 0; padding: 0; }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+
+/* ==========================================================================
+   02. 共通レイアウト（コンテナ / セクション見出し）
+   ========================================================================== */
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(24px, 8vw, 96px);
+}
+
+/* クイックリンク（使ってみよう〜関連サイト）でのページ内ジャンプ時、
+   固定ヘッダーに各セクションのタイトルが隠れないよう上に余白を確保 */
+#usecase, #explore, #diagnosis, #biz, #ranking, #news, #links { scroll-margin-top: 150px; }
+
+/* 各セクションの縦余白。基本は隣接セクションで 20+20=40px の間隔 */
+.section { padding-block: 20px; }
+.explore.section    { padding-bottom: 54px; }
+.diagnosis.section  { padding-top: 96px; padding-bottom: 40px; }  /* 下40＋企業向け上40=80px */
+.biz.section        { padding-top: 40px; padding-bottom: 96px; }
+.news.section       { padding-block: 50px; }
+.mascot-nav.section { padding-block: 50px; }
+.links.section      { padding-top: 120px; padding-bottom: 120px; }
+
+/* 白い角丸カードで囲むセクション（job tagとは 等）
+   上下40px・左右40px。左右40px = 中の横並びカードの左右余白になる。 */
+.panel {
+  background: var(--c-surface);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+}
+
+/* 日本語のセクション見出し（例：使ってみよう！）／ 見出し→リード 20px */
+.sec-title {
+  margin: 0 0 40px;
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: .04em;
+}
+.sec-title.-blue { color: var(--c-blue); }
+
+.sec-lead {
+  margin: 0 0 40px;
+  color: #212529;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;          /* 本文統一: 150% */
+}
+
+/* 英字の大見出し（RANKING / NEWS / LINKS）＋ 下に日本語ルビ */
+.en-title {
+  text-align: center;
+  margin: 0 0 36px;
+}
+/* RANKING/NEWS/LINKS の英字見出しのみ Noto Sans JP / 55px / 400 / 100% / 大文字
+   色は青（#0568D3）。RANKINGのみ白に上書き。 */
+.en-title__en {
+  display: block;
+  color: var(--c-primary);
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 55px;
+  font-weight: 400;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+.en-title__jp {
+  display: block;
+  margin-top: 10px;          /* 英字見出し→サブタイトル 10px */
+  font-size: 14px;
+  letter-spacing: .1em;
+}
+
+
+/* ==========================================================================
+   03. 共通コンポーネント（ボタン / カード）
+   ========================================================================== */
+/* --- 塗りボタン（青） --- */
+/* 大CTAボタン共通（新規登録・ログイン / 色々な切り口から検索 / 自己診断ツール一覧）
+   白文字20px/700/line-height26px、余白 上下23px・左右56px、テキスト→矢印8px */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 23px 40px;
+  border-radius: var(--radius-pill);
+  background: var(--c-blue);
+  color: #FFF;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: .04em;
+  transition: background .2s, transform .2s;
+}
+.btn:hover { background: var(--c-blue-deep); opacity: 1; transform: translateY(-1px); }
+.btn .chev { font-size: 15px; }
+
+/* --- 3色カードCTAのチェブロン（プレーンな白矢印） --- */
+.btn-chevron { width: 18px; height: 18px; }
+
+
+/* ==========================================================================
+   04. ユーティリティバー（文字サイズ / 支援ツール / 厚労省ロゴ）
+   ========================================================================== */
+/* 固定ヘッダー：薄い青バー〜白ナビまでを画面上部に貼り付ける */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ヘッダー3バンドは画面いっぱいに広げ、左右に 30px の余白のみを持たせる。
+   これにより各要素（ロゴ＝左端 / 新規登録＝右端）が画面の左右に寄る。 */
+.utilbar .container,
+.header .container,
+.gnav .container {
+  max-width: none;
+  padding-inline: 30px;
+}
+
+.utilbar {
+  background: var(--c-header-bg);                 /* 薄い青 #E6F0FB */
+  border-bottom: 1px solid var(--c-header-line);  /* 薄い青同士（ユーティリティ⇄ロゴ行）の境界線 #0568D3 */
+  font-size: 13px;
+}
+.utilbar__inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 66px;
+}
+.utilbar__group { display: flex; align-items: center; gap: 10px; }
+
+/* ラベル（文字サイズ / サイト閲覧支援ツール起動）: #221A16 / 12px / line-height 18px */
+.utilbar__label {
+  color: #221A16;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+/* ヘルプアイコン（？） */
+.utilbar__help { width: 22px; height: 22px; display: block; }
+
+/* 文字サイズ切替（標準/大/特大）
+   選択(標準): 青塗り＋白文字 / 非選択(大・特大): 白地＋青枠＋青文字 #0568D3 */
+.fontsize { display: inline-flex; align-items: center; gap: 6px; }
+.fontsize button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 7px;                 /* 指定値: 4px 7.02px 4px 6.98px */
+  border-radius: var(--radius-pill);
+  border: 1px solid #0568D3;
+  background: var(--c-header-bg);   /* 非選択は薄青 #E6F0FB */
+  color: #0568D3;                   /* 非選択の文字色 */
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: center;
+}
+.fontsize button.is-active {
+  background: #0568D3;              /* 選択時は青塗り */
+  border-color: #0568D3;
+  color: #fff;
+}
+
+.utilbar__spacer { margin-left: auto; }
+.utilbar__mhlw img { height: 34px; }
+
+
+/* ==========================================================================
+   05. ヘッダー（ロゴ / 検索窓 / マイリスト / メニュー / ログイン）
+   ========================================================================== */
+.header {
+  background: var(--c-header-bg);   /* 薄い青 #E6F0FB（白ナビとの境界線は入れない） */
+}
+/* 各要素の間隔は個別マージンで制御（指定画像の数値に準拠）
+   ロゴ→検索:44 / 検索→マイリスト:15 / マイリスト→メニュー:17 / メニュー→ログイン:17 */
+.header__inner {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  min-height: 78px;
+}
+.header__logo { flex: none; margin-right: 44px; }
+.header__logo img { height: 40px; }
+
+/* 検索窓：max-widthを外し flex:1 で余白いっぱいに伸縮
+   → 画面幅が変わっても指定画像のような比率を保つ（検索窓が主役） */
+.searchbox {
+  flex: 1 1 auto;
+  min-width: 150px;   /* マイリストボタンが横長化した分、検索窓は縮小して調整 */
+  display: flex;
+  align-items: center;
+  height: 43px;
+  padding: 0 8px 0 22px;
+  border: 1px solid var(--c-blue);
+  border-radius: var(--radius-pill);
+  background: #fff;
+}
+.searchbox input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--c-text);
+  background: transparent;
+}
+/* プレースホルダー: #B6B6B6 / 16px / weight700 / line-height24px */
+.searchbox input::placeholder {
+  color: #B6B6B6;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+}
+.searchbox__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  color: var(--c-blue);
+  font-size: 20px;
+}
+/* 検索ドロップ用ラッパ：PCではボックスを持たず素通し（display:contents）。
+   クリア(❌)・閉じる(∧)ボタンはSP検索表示専用のため既定は非表示 */
+.header__search-drop { display: contents; }
+.searchbox__clear,
+.header__search-close { display: none; }
+
+/* マイリスト：赤いピルボタン（白い星＋白文字）。検索窓との間隔10px */
+.mylist {
+  flex: none;
+  margin-left: 10px;                 /* 検索窓 → マイリスト 10px */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;                          /* 星 ↔ テキスト 6px */
+  padding: 10px 20px 10px 15px;      /* 上10/右20/下10/左15 */
+  min-height: 43px;                  /* ボタン高さ59px */
+  background: var(--c-red);
+  border-radius: 999px;              /* ピル形 */
+  color: #FFF;
+  font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16.5px;               /* 110% */
+  text-decoration: none;
+  white-space: nowrap;
+}
+.mylist:hover { opacity: .92; }
+/* 星アイコン（白／star.svg）：約21×20（一回り小さく） */
+.mylist img { width: 21px; height: 20px; }
+
+/* メニュートグル：マイリストとの間隔 17px */
+.menu-toggle {
+  flex: none;
+  margin-left: 10px;   /* マイリスト → メニュー 10px */
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 20px;
+  border: 1.5px solid var(--c-blue);
+  border-radius: var(--radius-pill);
+  color: var(--c-blue);
+  font-size: 15px;
+  font-weight: 700;
+}
+.menu-toggle .arrow { width: 24px; height: 24px; transition: transform .2s; }   /* 矢印を拡大（可視の山形は12×6px） */
+.menu-toggle[aria-expanded="true"] .arrow { transform: rotate(180deg); }
+/* メニューアイコン（バー3本）：各16×2px・#0568D3。PCは間隔4px（SPは6px） */
+.menu-toggle .menu-toggle__bars {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;            /* PC：バー間隔4px */
+  width: 16px;
+  flex: none;
+}
+.menu-toggle .menu-toggle__bars i {
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 1px;
+  background: #0568D3;
+}
+
+/* 新規登録・ログイン：メニューとの間隔 17px */
+.btn-login {
+  flex: none;
+  margin-left: 17px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 20px;
+  border-radius: var(--radius-pill);
+  background: var(--c-blue);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  line-height: 130%;
+}
+.btn-login .ico { width: 1.4em; height: 1.4em; }   /* 人物アイコンを少し大きく（約21px） */
+.btn-login:hover { background: var(--c-blue-deep); opacity: 1; }
+
+
+/* ==========================================================================
+   06. グローバルナビ
+   ========================================================================== */
+.gnav {
+  background: var(--c-surface);              /* 白い部分（境界線なし・影で段差を表現） */
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 6px 14px rgba(6, 104, 211, .10); /* 白ナビ下に落ちる影 */
+}
+.gnav__list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 38px;
+  min-height: 64px;
+  align-items: center;
+}
+.gnav__list li { position: relative; }
+/* 各要素の間に縦線（1px × 24px / #9CBCE5）。
+   gap:38px の中央に来るよう左へ19px（gapの半分）ずらして配置 */
+.gnav__list li:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  left: -19px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 24px;
+  background: var(--c-nav-divider);
+}
+.gnav__list a {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--c-text);
+}
+.gnav__list a:hover { color: var(--c-blue); opacity: 1; }
+/* SP全画面メニュー専用の項目（マイリスト・サイト閲覧支援・色々な・ログイン/新規登録）はPCでは非表示 */
+.gnav__sp, .gnav__actions { display: none; }
+/* マイリスト・サイト閲覧支援ツールはPC非表示（.gnav__list>li の display を上書きする高い詳細度が必要） */
+.gnav__list > li.gnav__mylist,
+.gnav__list > li.gnav__support { display: none; }
+
+/* --- グローバルナビ ドロップダウン（本家準拠：白パネル＋青い「>」＋区切り線） --- */
+.gnav__list { align-items: stretch; }          /* 各項目を帯の高さいっぱいに */
+.gnav__list > li { display: flex; align-items: center; }
+.gnav__item.has-sub > a { display: flex; align-items: center; height: 100%; cursor: pointer; }
+.gnav__sub {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 244px;
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(6, 104, 211, .18);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity .15s ease, transform .15s ease, visibility .15s;
+  z-index: 200;
+}
+.gnav__item.has-sub:hover > .gnav__sub,
+.gnav__item.has-sub:focus-within > .gnav__sub {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.gnav__sub li { display: block; }
+.gnav__sub li:not(:first-child)::before { display: none; }   /* 親ナビの縦区切り線を継承しない */
+.gnav__sub a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 3px 24px;          /* 上下を詰める */
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--c-text);
+  white-space: nowrap;
+}
+.gnav__sub a:hover { background: #f2f7fd; color: var(--c-primary); }
+.gnav__sub .ico { width: 8px; height: 13px; color: var(--c-primary); flex: 0 0 auto; }
+
+/* PC（≧1101px）：グローバルナビ（白いバー）は初期非表示。メニューボタンで出現/非表示トグル */
+@media (min-width: 1101px) {
+  .gnav { display: none; }
+  .site-header.is-menu-open .gnav { display: block; }
+}
+
+
+/* ==========================================================================
+   07. クイックリンクバー（使ってみよう / 職業を調べてみよう …）
+   ========================================================================== */
+.quicklinks { padding-block: 28px; }
+.quicklinks__list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  background: var(--c-surface);
+  border-radius: var(--radius);
+  padding: 22px 28px;
+}
+.quicklinks__list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--c-blue-link);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* リンク頭の矢印アイコン（yajirusi.png・16×16px） */
+.quicklinks__list a::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 16px; height: 16px;
+  background: url(../img/top/yajirusi.png) center / contain no-repeat;
+}
+
+
+/* ==========================================================================
+   08. job tag とは（ヒーロー）
+   ========================================================================== */
+.about { padding-top: 8px; }
+.about__head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 24px;             /* 見出し→説明文 24px */
+}
+.about__head img { height: 80px; }  /* ロゴ 300×80 */
+.about__head b { font-size: 36px; font-weight: 700; }
+
+/* 説明文（Figmaスペック準拠）
+   本文: #212529 / 16px / weight400 / line-height36px(225%)
+   強調: #0568D3 / weight700（font-size・line-heightは本文を継承） */
+.about__desc {
+  color: #212529;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 36px;          /* 本文統一: 150% */
+  margin: 0 auto 40px;
+  max-width: 960px;
+}
+.about__desc .hl {
+  color: var(--c-primary);   /* #0568D3 */
+  font-weight: 700;
+}
+
+/* 3つの特徴カード：幅より間隔を優先（カード間16px・左右40pxはパネルpadding）。
+   1fr なので幅は画面に応じて可変、間隔は常に16pxで固定される。 */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.feature-card {
+  min-height: 388px;               /* 画像指定のカード高さ */
+  border: 4px solid var(--c-border-blue);
+  border-radius: 24px;             /* PC・SP共通 24px */
+  background: var(--c-surface-alt);
+  padding: 32px 24px;
+  text-align: center;
+}
+.feature-card__img {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;             /* 画像→タイトル 24px */
+}
+.feature-card__img img { max-height: 150px; }
+.feature-card__title {
+  color: var(--c-blue);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 150%;
+  margin: 0 0 16px;                /* タイトル→本文 16px */
+}
+.feature-card__text {
+  font-size: 16px;
+  color: var(--c-text);
+  margin: 0;
+  line-height: 24px;
+}
+
+/* ログインCTA：カード→注記 40px / 注記→ボタン 10px */
+.about__cta { text-align: center; margin-top: 40px; }
+.about__cta-note {
+  display: block;
+  color: var(--c-blue);
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-size: 16px;
+  letter-spacing: 3.2px;
+  line-height: 24px;
+}
+
+
+/* ==========================================================================
+   09. 使ってみよう！（3色カード + 動画/ガイドバナー）
+   ========================================================================== */
+.usecase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;   /* 横並び3要素は間隔16px優先 */
+}
+.usecase-card {
+  border-radius: 28px;   /* 枠・背景・色帯すべて28px（overflow:hiddenで角を統一） */
+  overflow: hidden;
+  background: var(--c-surface);
+  border: 2px solid var(--c-border);   /* 枠線 1px → 2px */
+  display: flex;
+  flex-direction: column;
+}
+/* カード上部の色帯（アイコン + タイトル）
+   2行タイトル(学生)も1行(企業/キャリア)も同じ高さに揃うよう min-height を
+   2行分が収まる200pxに設定。全カードの色帯の高さ＝白本文の開始位置が揃う。 */
+.usecase-card__head {
+  min-height: 200px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;   /* アイコンを上端で固定し、3枚の横位置を揃える */
+  text-align: center;
+  color: #fff;
+}
+.usecase-card__head .ico { font-size: 56px; line-height: 1; display: block; margin: 0 auto 8px;  } /* アイコン→タイトル 8px */
+/* 差し込みアイコン画像（白の線アイコン） */
+.usecase-card__ico { display: block; width: 58px; height: 58px; margin: 0 auto 8px; }
+/* タイトル: 白 / 24px / weight700 / line-height160% */
+.usecase-card__head h3 {
+  margin: auto 0;              /* アイコン下の残り領域でタイトルを縦中央に */
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+/* 3色 */
+.usecase-card.-orange .usecase-card__head { background: var(--c-orange); }
+.usecase-card.-teal   .usecase-card__head { background: var(--c-teal); }
+.usecase-card.-pink   .usecase-card__head { background: var(--c-pink); }
+.usecase-card.-orange { border-color: var(--c-orange); }
+.usecase-card.-teal   { border-color: var(--c-teal); }
+.usecase-card.-pink   { border-color: var(--c-pink); }
+
+.usecase-card__body {
+  flex: 1;
+  padding: 16px 24px 0;   /* ヘッダー→本文 16px */
+}
+/* 本文リスト: #212529 / 14px / weight400 / line-height150%(21px) */
+.usecase-card__body ul li {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 3px;
+  color: #212529;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%;
+}
+.usecase-card__body ul li::before {
+  content: "・";
+  position: absolute;
+  left: 0;
+}
+/* リスト→ボタン 16px / ボタン→カード下端 24px */
+.usecase-card__foot { padding: 16px 24px 24px; }
+.usecase-card__btn {
+  position: relative;              /* チェブロンを右端に絶対配置するため */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 14px;
+  border-radius: var(--radius-pill);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+}
+/* チェブロン：テキストは中央、矢印は右端から24px */
+.usecase-card__btn .btn-chevron {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.usecase-card.-orange .usecase-card__btn { background: var(--c-orange); }
+.usecase-card.-teal   .usecase-card__btn { background: var(--c-teal); }
+.usecase-card.-pink   .usecase-card__btn { background: var(--c-pink); }
+
+/* 動画 / 活用ガイド バナー（カードとの間16px・バナー間16px） */
+.usecase-banners {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+.banner-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* 中身（アイコン＋文字＋画像）をまとめて中央揃え */
+  gap: 18px;
+  border: 2px solid var(--c-border-blue);
+  border-radius: var(--radius);
+  padding: 20px 26px;
+  background: var(--c-surface);
+  min-height: 108px;
+}
+.banner-box__yt img { width: 66px; }
+/* バナー見出し: #007BFF / 24px / weight700 / line-height130% */
+.banner-box__text {
+  color: #007BFF;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.banner-box__thumb { margin-left: 0; }
+.banner-box__thumb img { max-height: 84px; }
+/* 動画バナー右側のマスコット（差し込み画像 character.svg） */
+.banner-box__mascot { margin-left: 0; }
+.banner-box__mascot img { width: 59px; height: 81px; }   /* PC：59×81px */
+
+
+/* ==========================================================================
+   10. 職業を調べてみよう！（青帯検索 + カテゴリカードグリッド）
+   ========================================================================== */
+.explore .panel { padding: 0; overflow: hidden; }
+
+/* 青帯の検索エリア */
+/* 青帯: 上32px→見出し→40px→検索窓→32px下 */
+.explore__search {
+  background: var(--c-blue);
+  padding: 32px 40px;
+  text-align: center;
+}
+.explore__search h2 {
+  color: #fff;
+  font-size: 36px;          /* 見出し統一 25px */
+  font-weight: 700;
+  margin: 0 0 40px;         /* 見出し→検索窓 40px */
+  line-height: 150%;
+  letter-spacing: .04em;
+}
+.explore__search .searchbox {
+  max-width: 720px;
+  height: 56px;
+  margin-inline: auto;
+  border-color: #fff;
+}
+
+/* カテゴリカードのグリッド（3列） */
+.explore__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;               /* カード間16px */
+  padding: 40px 40px 0;    /* 上40・左右40（下はボタン側で40確保） */
+}
+/* カード高さ166px・padding24px → アイコン(103px)が上から31.5pxで中央寄せに揃う */
+.cat-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;                 /* アイコン→テキスト 24px */
+  min-height: 166px;
+  background: var(--c-chip-blue);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+/* 差し込み画像そのものが青丸アイコン。サイズは103px */
+.cat-card__icon {
+  flex: 0 0 auto;
+  width: 103px; height: 103px;
+}
+.cat-card__icon img { width: 103px; height: 103px; }
+/* タイトル: 青 #0568D3 / 24px / weight700 / line-height130% */
+.cat-card__body h3 {
+  margin: 0 0 0px;
+  color: var(--c-primary);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+/* 本文: #212529 / 16px / weight400 / line-height24px / 左寄せ */
+.cat-card__body p {
+  margin: 0;
+  color: #212529;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+/* 色々な切り口から検索ボタン：グリッド→ボタン40px / ボタン→下端40px */
+.explore__more { text-align: center; padding: 40px; }
+
+
+/* ==========================================================================
+   11. 自己診断ツール（3カード）
+   ========================================================================== */
+/* リード文（自身の興味〜）: #333 / 23px / weight400 / line-height24px / 中央 */
+.diagnosis .sec-lead {
+  margin-bottom: 37px;                                /* リード→カード 37px */
+  color: #333;
+  text-align: center;
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 24px;
+}
+.diagnosis .section__more { margin-top: 37px; }      /* カード→一覧ボタン 37px */
+.diagnosis-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;   /* 横並び3要素は間隔16px優先 */
+}
+.diag-card {
+  border: 2px solid var(--c-border-blue);
+  border-radius: 32px;   /* 青枠カード 32px */
+  background: var(--c-surface);
+  padding: 24px 22px 26px;
+  text-align: center;
+  display: flex;            /* ボタンを下端で揃えるため縦フレックスに */
+  flex-direction: column;
+}
+.diag-card__img { height: 150px; display: flex; align-items: center; justify-content: center; }
+.diag-card__img img { max-height: 150px; }
+/* タイトル基準（「から探す」等）: #6C757D / 24px / weight700 / line-height160% */
+.diag-card__title {
+  color: #6C757D;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 160%;
+  margin: 6px 0 16px;
+}
+/* 「〜〜」部分: #0568D3（青）/ 24px / weight700 / line-height160% */
+.diag-card__title .q {
+  color: #0568D3;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 160%;
+}
+.diag-card__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: auto;   /* タイトルの行数差を吸収し、3枚のボタンを下端で揃える */
+  padding: 20px 13px;   /* PC：縦padding 20px */
+  border-radius: var(--radius-pill);
+  background: var(--c-blue);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+}
+.section__more { text-align: center; margin-top: 40px; }
+
+
+/* ==========================================================================
+   12. 企業の方向けツール（2×2カード）
+   ========================================================================== */
+.biz-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+/* カードを縦フレックスにし、ボタンを最下部に揃える（ボタン→下端40px） */
+.biz-card {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--c-border-blue);
+  border-radius: 32px;   /* 青枠カード 32px */
+  background: var(--c-surface);
+  padding: 30px 32px 40px;
+}
+.biz-card__head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.biz-card__head img { width: 110px; }
+/* タイトル: 通常は黒 #212529 / 20px / weight700 / line-height160% / 中央、指定部分のみ青 */
+.biz-card__head h3 {
+  margin: 0;
+  color: #212529;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 160%;
+}
+.biz-card__head h3 .biz-blue { color: var(--c-primary); }
+/* 企業の方向けツール（PC ≥641pxのみ）：見出しの青文字を黒に統一し、強制改行を解除。SP(≤640px)は現状維持 */
+@media (min-width: 641px) {
+  .biz-card__head h3 .biz-blue { color: inherit; }  /* 青 → 見出し本体色 #212529 に統一 */
+  .biz-card__head h3 br { display: none; }           /* 「サポート」前などの改行を解除 */
+}
+/* 本文: #212529 / 16px / weight400 / line-height24px / 左寄せ */
+.biz-card__text {
+  color: #212529;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0 0 22px;
+}
+.biz-card__btn {
+  margin-top: auto;                /* 高さの違うカードでもボタンを最下部に揃える */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 20px 15px;   /* PC：縦padding 20px */
+  border-radius: var(--radius-pill);
+  background: var(--c-blue);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+
+/* ==========================================================================
+   13. RANKING（職業アクセスランキング）
+   ── 青背景の全幅セクション
+   ========================================================================== */
+.ranking {
+  background: var(--c-blue-ranking);
+  color: #fff;
+  padding-top: 120px;      /* 青上端→RANKING見出し */
+  padding-bottom: 124px;   /* ランキング一覧→青下端 */
+}
+.ranking .en-title__en,
+.ranking .en-title__jp { color: #fff; }
+.ranking .en-title { margin-bottom: 40px; }   /* 見出し→タブ 40px */
+
+/* 週間 / 月間 / 年間 タブ */
+.rank-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 41px;   /* タブ→1位 41px */
+}
+.rank-tabs__btn {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 6px 32px;     /* タブ文字→区切り線 32px */
+  position: relative;
+  opacity: .8;
+}
+.rank-tabs__btn.is-active { opacity: 1; }
+.rank-tabs__btn.is-active::after {
+  content: "";
+  position: absolute;
+  left: 32px; right: 32px; bottom: -8px;
+  height: 4px;
+  background: var(--c-yellow);
+  border-radius: 3px;
+}
+.rank-tabs__sep { color: rgba(255,255,255,.5); }
+
+/* 1位：画像を左半分の右寄せ（右端＝中央線）、テキストを右半分に配置 */
+.rank-hero {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;       /* 1位→2〜5位 40px */
+}
+.rank-hero__thumb {
+  width: 50%;                /* 左半分 */
+  display: flex;
+  justify-content: flex-end; /* 画像を右寄せ → 右端が中央線に一致 */
+}
+.rank-hero__thumb img {
+  width: 440px;
+  max-width: 100%;
+  aspect-ratio: 440 / 290;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #cdd6e2;
+  display: block;
+}
+.rank-hero__meta {
+  width: 50%;                /* 右半分 */
+  padding-left: 24px;        /* 中央線→テキスト 24px */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;                 /* 順位行→タイトル 18px */
+}
+.rank-rank {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 60px;
+}
+.rank-rank .trophy { font-size: 26px; }        /* 色は rank-c--N を継承 */
+.rank-hero__title { font-size: 26px; font-weight: 700; margin: 0; }
+.rank-hero__title a,
+.rank-item__title a { color: inherit; }
+
+/* 2〜5位（横4カラム） */
+.rank-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin-bottom: 40px;
+}
+.rank-item__thumb { display: block; }
+.rank-item__thumb img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #cdd6e2;
+  display: block;
+}
+.rank-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 4px;
+  font-size: 26px;
+  font-weight: 700;
+}
+.rank-item__meta .trophy { font-size: 22px; }  /* 色は rank-c--N を継承 */
+.rank-item__title { font-size: 16px; margin: 0; }
+
+/* 順位・トロフィーの色（1位=金 / 2位=銀 / 3位=銅）。数字とトロフィーが継承 */
+.rank-c--1 { color: #D4AF37; }
+.rank-c--2 { color: #BDC3C9; }
+.rank-c--3 { color: #EC963E; }
+
+/* 順位変動アイコン：上昇=#FFC000（矢印を上向きに180°回転）/ 下落=#B6B6B6（基準の下向き）/ 変動なし=白
+   ※スプライト #i-arrow-move は下向きの二重シェブロン。上昇のみ回転して上向きにする。 */
+.rank-move { display: inline-flex; align-items: center; font-size: 24px; }
+.rank-move .ico { width: 1em; height: 1em; fill: currentColor; }
+.rank-move.-up   { color: #FFC000; }
+.rank-move.-up .ico { transform: rotate(180deg); }
+.rank-move.-down { color: #B6B6B6; }
+.rank-move.-stay { color: #fff; opacity: .8; }
+
+.rank-loading,
+.rank-error { text-align: center; color: #fff; opacity: .85; padding: 40px 0; margin: 0; }
+.ranking__more { text-align: center; }
+.ranking__more a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+}
+.ranking__more .chev { color: #FFF; }
+
+
+/* ==========================================================================
+   14. NEWS
+   ========================================================================== */
+.news { background: var(--c-bg-gray); }
+/* ニュース一覧は左寄せ（中央寄せの max-width を解除）／見出し→リスト 32px は news .en-title で */
+.news__list { margin: 0 0 32px; }              /* リスト→一覧リンク 142px */
+.news .en-title { margin-bottom: 32px; }        /* サブタイトル→1件目 32px */
+.news .section__more { margin-top: 0; }         /* 上の142pxで間隔を確保するため0に */
+.news__item {
+  border-left: 3px solid var(--c-primary);
+  padding: 4px 0 4px 16px;
+  margin-bottom: 16px;                          /* 記事間 16px */
+}
+/* 日付: #6A7276 / Noto Sans JP / 11px / weight400 / line-height100% */
+.news__date {
+  display: block;
+  color: #6A7276;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 100%;
+}
+/* タイトル: #0568D3 / 16px / weight700 / line-height24px */
+.news__title {
+  color: var(--c-primary);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+.news__item a:hover .news__title { text-decoration: underline; }
+/* ニュース一覧はこちら: #0568D3 / 20px / weight700 / center / line-height16px */
+.news__more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--c-primary);
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+
+/* ==========================================================================
+   15. タグしつじ ナビゲート
+   ========================================================================== */
+.mascot-nav { background: #CDE1F6; }         /* セクション背景 */
+.mascot-nav .panel {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 47px;                 /* キャラ画像→文字 47px */
+  align-items: center;
+}
+.mascot-nav__img { text-align: center; }
+.mascot-nav__img img { width: 268px; max-width: 100%; height: auto; }  /* マスコット 268×200 */
+.mascot-nav__img figcaption { font-size: 12px; color: var(--c-text-weak); margin-top: 4px; }
+/* タイトル: 「があなたを…」= #212529 / 28px / 700 / 150%、「タグしつじ」= 青 / 36px */
+.mascot-nav__title {
+  text-align: center;
+  color: #212529;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 150%;
+  margin: 0 0 18px;
+}
+.mascot-nav__title .name {
+  color: var(--c-primary);
+  font-size: 36px;
+  line-height: 150%;
+  font-weight: 700;
+
+}
+/* 本文: #333 / 21px / weight400 / line-height200% / 中央 */
+.mascot-nav__text {
+  color: #333;
+  text-align: justify;   /* 改行を廃し両端揃え（PC要望／SP見本に合致） */
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 200%;
+  margin: 0;
+}
+/* PC（≧641px）のみ：タイトルを見出し用フォントに、本文を中央揃え（SPは変更しない） */
+@media (min-width: 641px) {
+  .mascot-nav__title,
+  .mascot-nav__title .name {
+    font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  }
+  .mascot-nav__text { text-align: center; }
+  /* 画像の間隔に合わせる：パネル上下30・左右60、画像→本文30。羊画像は列内中央 */
+  .mascot-nav .panel { padding: 30px 60px; gap: 30px; }
+  .mascot-nav__img { justify-self: center; text-align: center; }
+}
+
+
+/* ==========================================================================
+   16. LINKS（関連サイト カルーセル）
+   ========================================================================== */
+.links { background: var(--c-bg-gray); }
+.links .en-title { margin-bottom: 45.5px; }   /* 関連サイト→バナー 45.5px */
+.links__viewport { overflow: hidden; }
+.links__track {
+  display: flex;
+  gap: 16px;                          /* バナー間 16px */
+  transition: transform .4s ease;
+}
+/* バナーカードは固定 300×169。追加/削除しても崩れない */
+.link-card {
+  flex: 0 0 300px;
+  text-align: left;                   /* タイトル左寄せ */
+}
+.link-card__thumb {
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  width: 300px;
+  aspect-ratio: 300 / 169;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.link-card__thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ドットインジケータ */
+.links__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;                   /* バナー→ドット 20px */
+}
+/* 青い輪郭の丸。アクティブは塗りつぶし */
+.links__dots { gap: 8px; }               /* ドット間8px（PC・SP共通） */
+.links__dots button {
+  flex: 0 0 auto;                        /* フレックスで潰れない */
+  box-sizing: border-box;
+  padding: 0;                            /* ボタン既定の左右余白を除去（横長楕円の原因） */
+  width: 8px; height: 8px;               /* 8×8pxの正円（PC・SP共通） */
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--c-primary);
+}
+.links__dots button.is-active { background: var(--c-primary); border-color: var(--c-primary); }
+.links__more { text-align: center; margin-top: 20px; }
+.links__more a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--c-blue);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+
+/* ==========================================================================
+   17. フッター
+   ========================================================================== */
+.footer {
+  background: var(--c-footer);
+  color: var(--c-footer-text);
+  padding-top: 56px;
+}
+.footer__top {
+  display: grid;
+  grid-template-columns: 300px 1fr 1fr 1fr;
+  gap: 40px;
+}
+.footer__brand-logo { margin-bottom: 18px; }
+.footer__brand-logo img { width: 299px; height: 66px; max-width: 100%; }  /* PC：299×66px */
+.footer__brand-text { font-size: 13px; line-height: 1.9; margin: 0 0 20px; color: #fff; max-width: 299px; }  /* 文章はロゴ幅（299px）を超えない */
+.footer__brand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: 1px solid #fff;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  color: #fff;
+}
+
+/* 「職業情報提供サイトって何？」の先頭アイコン（help_icon をインライン化し白塗り） */
+.footer__brand-btn-icon { flex: 0 0 auto; display: inline-block; width: 20px; height: 20px; }
+.footer__brand-btn-icon path { fill: #fff; }
+
+.footer__col h4 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 8px;
+}
+.footer__col + .footer__col h4:empty { margin: 0; }
+.footer__col ul li { margin-bottom: 8px; }
+.footer__col ul li a { font-size: 14px; color: var(--c-footer-text);line-height: 150%;}
+.footer__col ul li a:hover { color: #fff; text-decoration: underline; }
+
+/* 2段目のカラム（ツール / ピックアップ / その他） */
+.footer__row2 {
+  display: grid;
+  grid-template-columns: 300px 1fr 1fr 1fr;
+  gap: 40px;
+  margin-top: 36px;
+}
+
+/* フッター最下部の帯 */
+.footer__bottom {
+  margin-top: 48px;
+  background: var(--c-footer-deep);
+  padding-block: 24px;   /* 上端→リンク24px／コピーライト→下端24px */
+}
+.footer__bottom-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;   /* リンク間 24px（行・列とも） */
+}
+.footer__bottom-inner a {
+  color: #FFF;
+  font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;   /* 150% */
+}
+.footer__copyright {
+  color: #FFF;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 18px;   /* 150% */
+  margin-top: 16px;   /* リンク → コピーライト 16px */
+}
+
+
+/* ==========================================================================
+   18. 追従UI（PAGE TOP / アンケート）
+   ========================================================================== */
+.floaters {
+  position: fixed;
+  right: 22px;
+  bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 50;
+}
+.floater {
+  width: 73px; height: 73px;          /* 2つのフローティングを同サイズに統一 */
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 8px 18px rgba(17, 45, 92, .22);   /* ドロップシャドウを追加・強調 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-size: 11px;
+  color: var(--c-blue);
+  font-weight: 700;
+  border: 1px solid var(--c-border);
+}
+.floater .ico { font-size: 20px; }
+/* アンケート：青背景・白文字。新アイコン画像(questionnaire.png)を使用 */
+.floater.-survey {
+  background: var(--c-primary);
+  color: #fff;
+  border-color: var(--c-primary);
+}
+.floater__ico { width: auto; height: 30px; display: block; }   /* 新アイコンのサイズ */
+#pageTop { opacity: 0; pointer-events: none; transition: opacity .3s; }
+#pageTop.is-visible { opacity: 1; pointer-events: auto; }
+/* PAGE TOP：指定コンテナスタイル＋テキストスタイル（矢印は文字色を継承＝グレー） */
+#pageTop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 73px;
+  height: 73px;
+  aspect-ratio: 1 / 1;
+  border-radius: 80px;
+  border: 1px solid #6A7276;
+  background: rgba(255, 255, 255, .80);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .25);
+  color: #6A7276;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+
+/* ==========================================================================
+   18b. モバイル並び替えの土台（PCでは見た目そのまま）
+   ========================================================================== */
+/* モバイル用の検索アイコン・厚労省ロゴ（PCでは非表示）
+   ※ 並び替え用の flex 化は @640 内でのみ行う（PCは通常のブロックフロー） */
+.header__search-toggle { display: none; }
+.header__mhlw { display: none; }
+/* PC/SPでラベル文言を切替（既定はPC表示・SP用は隠す） */
+.sp-label { display: none; }
+/* SP専用の改行（PCでは無効） */
+.sp-br { display: none; }
+.pc-br { display: inline; }   /* PCのみ改行（SPで非表示） */
+.sp-hide { display: inline; }   /* SPのみ非表示にする要素（PCでは表示） */
+.sp-only { display: none; }     /* SPのみ表示する要素（PCでは非表示） */
+
+
+
+/* --- タブレット（〜980px）：3列→2列、ヘッダー折返し --- */
+@media (max-width: 1150px) {
+  .feature-grid,
+  .usecase-grid,
+  .explore__grid,
+  .diagnosis-grid { grid-template-columns: repeat(2, 1fr); }
+  .biz-grid { grid-template-columns: 1fr; }
+  .rank-grid { grid-template-columns: repeat(2, 1fr); }
+  /* リンクカードは固定300pxのまま（カルーセルが表示枚数を自動計算） */
+
+  .header__inner { flex-wrap: wrap; }
+  .searchbox { order: 3; max-width: none; width: 100%; }
+
+}
+
+/* ==== SPフッター（1100px未満）。1100px以上はPC版フッター（多列グリッド） ==== */
+@media (max-width: 1099.98px) {
+  .footer { padding-top: 28px; }
+  .footer__top,
+  .footer__row2 { grid-template-columns: 1fr; gap: 24px; }
+  .footer__row2 { margin-top: 24px; }
+  .footer__brand { grid-column: 1 / -1; text-align: center; }
+  .footer__brand-logo { margin-bottom: 12px; }
+  .footer__brand-logo img { width: 358px; height: 79px; max-width: 100%; }
+  .footer__brand-text { max-width: none; text-align: left; margin-bottom: 8px; line-height: 1.7; }
+  .footer__col h4 { margin-bottom: 6px; }
+  .footer__col ul li { margin-bottom: 4px; }
+  .footer__col ul li a { line-height: 1.5; }
+  .footer__bottom { padding-block: 16px; }
+  .footer__bottom-inner { justify-content: flex-start; gap: 8px 24px; }
+  .footer__bottom-inner a {
+    color: #FFF;
+    font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    font-size: 12px; font-style: normal; font-weight: 400; line-height: 18px;
+  }
+  .footer__copyright {
+    color: #FFF; text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px; font-style: normal; font-weight: 300; line-height: 18px;
+    margin-top: 16px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   19. レスポンシブ（PC優先 + 簡易対応）
+   ========================================================================== */
+
+
+/* --- タブレット・スマホ（〜1150px）：1列に集約／SPヘッダー（ハンバーガー）に切替 --- */
+@media (max-width: 1150px) {
+  .container { padding-inline: 16px; }   /* 両端の余白（薄青）を16pxに */
+  /* SPのコンパクト固定ヘッダー分。ページ内ジャンプ時にタイトルが隠れないように */
+  #usecase, #explore, #diagnosis, #biz, #ranking, #news, #links { scroll-margin-top: 80px; }
+  /* SP：白背景セクションは隣接で30px間隔（15+15）／背景色が変わるセクションは自前で30px＋30px */
+  .section { padding-block: 15px; }
+  .explore.section,
+  .diagnosis.section,
+  .biz.section,
+  .news.section,
+  .mascot-nav.section { padding-block: 30px; }
+  /* explore上部：上のusecase(15px)と合わせて実質30pxにするため上を15pxに（下は30pxのまま） */
+  .explore.section { padding-top: 15px; }
+  .links.section { padding-top: 30px; padding-bottom: 30px; }   /* 上下30px（背景色付き） */
+  .links .en-title { margin-bottom: 48px; }   /* 見出し→バナー 48px */
+  .links__dots { margin-top: 48px; }          /* バナー→ドット 48px */
+  .ranking { padding-top: 30px; padding-bottom: 30px; }   /* 上下30px */
+  .ranking .container { padding-inline: 16px; }       /* 左右16px */
+  .ranking .en-title { margin-bottom: 32px; }         /* 見出し→タブ 32px */
+  .ranking .en-title__jp {                            /* SPのみ：RANKING下サブ見出しの文字スタイル */
+    margin-top: 5px;                                  /* 見出し→サブ 5px */
+    color: #FFF;
+    text-align: center;
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+    text-transform: uppercase;
+  }
+
+  /* SPのみ：英字大見出し RANKING(白)/NEWS(青)/LINKS(青) を 30px / 700 / lh100% / 大文字（色は各セクションのまま） */
+  .en-title__en {
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+    text-transform: uppercase;
+  }
+  .rank-tabs { margin-bottom: 32px; }                       /* タブ→リスト 32px */
+  .rank-tabs__btn { padding: 6px 32px; font-size: 15px; }   /* タブ文字→区切り線 32px */
+  .rank-tabs__btn.is-active::after { left: 32px; right: 32px; }
+  .panel { padding: 30px 20px; }        /* パネル上下30・左右20 */
+  .sec-lead { font-size: 16px; }
+  /* sec-title / en-title / explore見出し はPC共通の 25px・30px を使用（SP上書きなし） */
+
+  /* 1カラムに集約（RANKINGの2〜5位のみ 2×2 を維持） */
+  .feature-grid,
+  .usecase-grid,
+  .explore__grid,
+  .diagnosis-grid,
+  .usecase-banners { grid-template-columns: 1fr; }
+  /* .rank-grid の列数は集約：2列＝@media(max-width:1150px) / 1列＝@media(max-width:639.98px) */
+
+  /* カード高さはモバイルでは内容なりに（固定高さ解除） */
+  .feature-card { min-height: 0; }
+  .usecase-card__head { min-height: 0; }
+
+  /* ランキング（SP）：画像メインの縦積み（ランキングページと同構成）
+     画像（16:9） → トロフィー・順位・上下 → 職業名。背景色は変更しない。 */
+  .rank-grid { gap: 24px; }
+  /* 1位 */
+  .rank-hero { flex-direction: column; align-items: stretch; gap: 0; margin-bottom: 24px; }
+  .rank-hero__thumb { width: 100%; justify-content: stretch; }
+  .rank-hero__thumb img { width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; object-fit: cover; }
+  .rank-hero__meta { flex-direction: column; width: auto; padding-left: 0; align-items: flex-start; text-align: left; gap: 6px; margin-top: 12px; }
+  .rank-rank { font-size: 22px; gap: 8px; line-height: 1; }
+  .rank-rank .trophy { font-size: 20px; }
+  .rank-hero__title {
+    margin: 0;
+    color: var(--color_base-bg, #FFF);
+    font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%;
+  }
+
+  /* 2〜5位：画像（16:9）→ トロフィー・順位・上下 → 職業名 の縦積み */
+  .rank-item { display: flex; flex-direction: column; gap: 0; }
+  .rank-item__thumb img { width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; object-fit: cover; }
+  .rank-item__meta { margin: 12px 0 0; font-size: 22px; gap: 8px; align-items: center; }
+  .rank-item__meta .trophy { font-size: 20px; }
+  .rank-item__title {
+    margin: 6px 0 0;
+    color: var(--color_base-bg, #FFF);
+    font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%;
+  }
+  .rank-move { font-size: 18px; }
+
+  /* ランキング一覧はこちら：右寄せ */
+  .ranking__more { text-align: right; margin-top: 32px; }
+
+  /* SPのみ：ニュース見出しの文字スタイル */
+  .news__title {
+    color: var(--primary, #0568D3);
+    font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+  }
+  /* SPのみ：「ニュース一覧はこちら」を右寄せ */
+  .news .section__more { text-align: right; }
+
+  /* SPのみ：NEWS下「ニュース」・LINKS下「関連サイト」のサブ見出し文字スタイル（RANKINGは白のため対象外） */
+  .news .en-title__jp,
+  .links .en-title__jp {
+    color: #0568D3;
+    text-align: center;
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+    text-transform: uppercase;
+  }
+
+  /* SPのみ：タイトル→画像→本文 の縦並びに再構成（PCは変更しない） */
+  .mascot-nav .panel { display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
+  .mascot-nav__body { display: contents; }   /* 本文コンテナを透過し、子(タイトル・本文)をpanel直下のフレックス要素に */
+  .mascot-nav__title { order: 1; margin: 0; position: relative; }
+  .mascot-nav__img   { order: 2; }
+  .mascot-nav__text  {          /* SPのみ：本文の文字スタイル */
+    order: 3; align-self: stretch;   /* 全幅にして両端揃えを効かせる */
+    color: #333;
+    font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 170%;
+  }
+
+  /* タイトル左右の青い斜線（SP専用の装飾）。角度・長さ・位置は下記の値で調整可 */
+  .mascot-nav__title::before,
+  .mascot-nav__title::after {
+    content: ""; position: absolute; bottom: 12px;
+    width: 42px; height: 3px; border-radius: 2px;
+    background: var(--c-primary);
+  }
+  .mascot-nav__title::before { right: 100%; margin-right: 1px; transform: rotate(50deg); }  /* 左「／」 */
+  .mascot-nav__title::after  { left: 100%;  margin-left: 1px;  transform: rotate(-50deg);  }  /* 右「＼」 */
+  .link-card { flex: 0 0 200px; }                                  /* SP：カード幅200px */
+  .link-card__thumb { width: 200px; height: 112.5px; aspect-ratio: auto; }  /* SP：バナー200×112.5px */
+
+  /* --- モバイルヘッダー（見本画像に忠実に再現） ---
+     並び：[job tagロゴ] [厚労省ロゴ] …余白… [検索アイコン] [ハンバーガー] */
+  .utilbar { display: none; }                        /* 文字サイズ等のバーは非表示 */
+  .header { min-height: 56px; border-top: none; }    /* 上部の青線なし */
+  .header .container { max-width: none; width: 100%; padding-left: 8px; padding-right: 18px; }   /* SP：ロゴ左8px／メニュー右18px */
+  .header__inner { flex-wrap: nowrap; min-height: 56px; gap: 0; position: relative; }
+
+  /* job tagロゴ（左端）実寸300×80 = 15/4 */
+  .header__logo { flex: 0 0 auto; margin-right: 24px; }   /* SP：厚労省ロゴとの間隔24px */
+  .header__logo img { width: 150px; height: 35px; aspect-ratio: auto; object-fit: fill; display: block; }   /* SP：150×35px（少し縦を詰める） */
+
+  /* 厚労省ロゴ（job tagロゴのすぐ右・小さめ） */
+  /* header__mhlw はimg自身に付くクラス。img内側ではなくこの要素に幅を指定する */
+  .header__mhlw { display: block; flex: 0 0 auto;  width: 74px; height: auto; object-fit: contain; }  /* 横幅73px・比率維持（高さ約19.8px） */
+
+  /* 右端：検索アイコン → ハンバーガー */
+  .header__search-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    flex: 0 0 auto; width: 32px; height: 32px; margin-left: auto;
+    padding: 0; border: none; background: none; color: var(--c-primary);
+  }
+  .header__search-toggle .ico { width: 18px; height: 18px; }   /* SP：虫眼鏡 18×18px */
+  .menu-toggle { flex: 0 0 auto; margin-left: 14px; padding: 0; border: none; background: none; }
+
+  /* PC専用要素は非表示 */
+  .mylist, .btn-login { display: none; }
+  .menu-toggle__label, .menu-toggle .arrow { display: none; }  /* ラベル・下矢印は消す（ハンバーガーのみ） */
+
+  /* ヘッダー検索：🔍タップでヘッダー下に「青い帯＋白い検索窓＋∧」をドロップ表示 */
+  .header .searchbox { display: none; }
+  /* 青い帯（バンド）：検索窓(flex:1) と ∧ を横並び。左16 / 右20 / 上下10 / 窓↔∧ 8 */
+  .header.is-search-open .header__search-drop {
+    display: flex; flex-direction: row; align-items: center; gap: 8px;
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 5;
+    background: #0568D3;
+    padding: 10px 20px 10px 16px;
+    box-sizing: border-box;
+  }
+  /* 並び順を明示：検索窓（左・伸長）→ ∧（右）を強制 */
+  .header.is-search-open .searchbox { order: 1; }
+  .header.is-search-open .header__search-close { order: 2; }
+  /* 白い検索窓（ピル）：高さ40px（帯は上下10pxパディングで総高60px） */
+  .header.is-search-open .searchbox {
+    display: flex; align-items: center;
+    flex: 1 1 auto; min-width: 0;
+    height: 40px; margin: 0;
+    padding: 0 16px 0 18px;              /* 左18(→🔍) / 右16(❌→窓端) */
+    border: none; border-radius: 999px; background: #fff;
+    box-shadow: none;
+  }
+  /* 左の虫眼鏡（submitを order:-1 で左に移動）：アイコン18×18 */
+  .header.is-search-open .searchbox__submit {
+    order: -1; flex: 0 0 auto;
+    width: 18px; height: 18px; margin: 0 5px 0 0;   /* 🔍 ↔ プレースホルダ 5px */
+    padding: 0; border: none; border-radius: 0; background: none; color: var(--c-primary);
+  }
+  .header.is-search-open .searchbox__submit .ico { width: 18px; height: 18px; }
+  /* 入力欄：SP検索窓のフォント指定 */
+  .header.is-search-open .searchbox input {
+    flex: 1 1 auto; min-width: 0; height: 100%;
+    border: none; background: none; padding: 0;
+    font-family: "Noto Sans JP", "Noto Sans CJK JP", sans-serif;
+    font-size: 14px; font-weight: 700; line-height: 24px;
+  }
+  .header.is-search-open .searchbox input::placeholder {
+    color: #B6B6B6;
+    font-family: "Noto Sans JP", "Noto Sans CJK JP", sans-serif;
+    font-size: 14px; font-weight: 700; line-height: 24px;
+  }
+  /* ❌ 入力クリア（グレー丸＋白×）：×グリフ13×13 */
+  .header.is-search-open .searchbox__clear {
+    order: 2; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px; margin-left: 8px; padding: 0;
+    border: none; border-radius: 50%; background: #9AA0A6; cursor: pointer;
+  }
+  .header.is-search-open .searchbox__clear svg { width: 13px; height: 13px; }
+  /* ∧ 検索を閉じる（白い矢印・背景なし）：検索窓の右隣（窓↔∧=8px / ∧→右端=20px は帯の gap・padding で担保） */
+  .header.is-search-open .header__search-close {
+    display: inline-flex; align-items: center; justify-content: center;
+    flex: 0 0 auto;
+    width: 24px; height: 24px; padding: 0;
+    border: none; background: none; cursor: pointer;
+  }
+  .header.is-search-open .header__search-close .ico { width: 24px; height: 24px; color: #fff; }
+  /* 🔍トグルのアクティブ表示：青い半透明の円（34×34） */
+  .header.is-search-open .header__search-toggle {
+    width: 34px; height: 34px; border-radius: 40px;
+    background: rgba(0, 114, 214, 0.40);
+  }
+
+  /* --- グローバルナビ＝全画面メニュー（本家風）。既定は非表示 --- */
+  .gnav { display: none; }
+  /* ハンバーガー押下でヘッダー下を全画面カバー（白背景・スクロール可） */
+  /* メニュー展開中：ヘッダー＋メニューを1つの全画面固定フレックスにまとめ、
+     top:56px のようなマジックナンバーをなくして高さに関係なく必ず密着させる */
+  .site-header.is-menu-open {
+    position: fixed; inset: 0;      /* 画面全体を覆う */
+    z-index: 1000;
+    display: flex; flex-direction: column;
+    background: #fff;               /* 白の下地。背後のページが透ける・隙間が出るのを防ぐ */
+  }
+  .site-header.is-menu-open .header { flex: 0 0 auto; }   /* ヘッダーは自然高さで最上部 */
+  .site-header.is-menu-open .gnav {
+    display: block;
+    flex: 1 1 auto; min-height: 0;   /* 残り全高をメニューが占有＝隙間ゼロ */
+    background: #fff;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;   /* スクロール連鎖を止め、背後のbodyへ伝播させない */
+    /* メニューアイコン（右上）を起点に、フェード＋わずかなスケールで出現（GPU負荷の軽い transform/opacity のみ） */
+    transform-origin: top right;
+    animation: gnavReveal .22s cubic-bezier(.22,.7,.3,1) both;
+  }
+  @keyframes gnavReveal {
+    from { opacity: 0; transform: translateY(-10px) scale(.97); }
+    to   { opacity: 1; transform: none; }
+  }
+  /* モーション控えめ設定の環境では無効化 */
+  @media (prefers-reduced-motion: reduce) {
+    .site-header.is-menu-open .gnav { animation: none; }
+  }
+  /* 背後のページスクロールをロック（背景が見える現象を根絶） */
+  body.is-menu-locked { overflow: hidden; }
+  .site-header.is-menu-open .gnav .container { max-width: none; width: 100%; padding: 0; }
+  /* SP専用項目を表示 */
+  .gnav__sp { display: block; }
+  .gnav__list > li.gnav__mylist,
+  .gnav__list > li.gnav__support { display: block; }   /* SPでは再表示 */
+  .gnav__list { flex-direction: column; align-items: stretch; gap: 0; min-height: 0; padding: 0; }
+  .gnav__list li:not(:first-child)::before { display: none; }
+  .gnav__list > li { display: block; }
+
+  /* トップレベル項目：全幅の行。区切り線は左右16px内側（border-bottom 1px #E6E6E6） */
+  .gnav__list > li > a {
+    display: flex; align-items: center; justify-content: space-between;
+    margin: 0 16px;                 /* 区切り線を左右16px内側に */
+    padding: 20.5px 0;              /* 上下20.5px */
+    border: none; border-radius: 0;
+    border-bottom: 1px solid #E6E6E6;
+    background: none;
+    color: var(--c-text); font-weight: 700; font-size: 16px;
+    transition: color .15s;
+  }
+  .gnav__list > li > a:active { color: var(--c-primary); }
+
+  /* 親項目：右端に青い開閉キャレット（▼→▲） */
+  .gnav__item.has-sub > a::after {
+    content: ""; flex: 0 0 auto;
+    width: 9px; height: 9px; margin-left: 12px;
+    border-right: 2px solid var(--c-primary);
+    border-bottom: 2px solid var(--c-primary);
+    transform: rotate(45deg) translate(-2px, -2px);
+    transition: transform .2s;
+  }
+  .gnav__item.has-sub.is-open > a::after { transform: rotate(225deg); }
+  /* 展開中は親の下グレーボーダーを消し、子要素と一体に見せる */
+  .gnav__item.has-sub.is-open > a { border-bottom: none; }
+
+  /* マイリスト（赤い丸に白星）／サイト閲覧支援（青い?）：アイコン＋左寄せ */
+  .gnav__list > li.gnav__mylist > a,
+  .gnav__list > li.gnav__support > a { justify-content: flex-start; }  /* 左寄せ（space-betweenを上書き） */
+  .gnav__list > li.gnav__mylist > a { gap: 10px; }    /* 星 ↔ 文字 10px */
+  .gnav__list > li.gnav__support > a { gap: 12px; }   /* 文字 ↔ ? 12px */
+  .gnav__star { flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; background: var(--c-red); display: inline-flex; align-items: center; justify-content: center; }
+  .gnav__star img { width: 16px; height: 15px; }
+  .gnav__help { width: 24px; height: 24px; }
+
+  /* サブメニュー（アコーディオン）：淡い青の入れ子・青い「›」つき */
+  .gnav__sub {
+    display: none;
+    position: static; opacity: 1; visibility: visible; transform: none;
+    box-shadow: none; min-width: 0;
+    margin: 0; padding: 4px 16px 10px;
+    border-radius: 0;
+    background: #fff;
+  }
+  .gnav__item.has-sub.is-open > .gnav__sub { display: block; }
+  .gnav__sub li:not(:first-child) > a { border-top: none; }
+  .gnav__sub a {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+    padding: 8px 6px 8px 14px;
+    border: none; border-radius: 8px;
+    font-size: 14px; font-weight: 500; color: var(--c-text);
+    transition: background .15s, color .15s;
+  }
+  .gnav__sub a:active { background: #e3eefb; color: var(--c-primary); }
+  .gnav__sub .ico { display: inline-flex; width: 7px; height: 12px; color: var(--c-primary); flex: 0 0 auto; }
+
+  /* 下部アクション：ログイン（青塗り）／新規登録（白枠青文字） */
+  .gnav__actions { display: flex; flex-direction: column; gap: 12px; padding: 16px; }
+  .gnav-btn {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    height: 56px; border-radius: 999px;
+    font-size: 16px; font-weight: 700; text-decoration: none;
+  }
+  .gnav-btn .chev { position: absolute; right: 24px; top: 50%; transform: translateY(-50%); width: 12px; height: 12px; }
+  .gnav-btn--login { background: #0568D3; color: #fff; }
+  .gnav-btn--register { background: #fff; color: #0568D3; border: 1.5px solid #0568D3; }
+
+  /* ハンバーガー → ✕（メニュー展開中） */
+  .menu-toggle__bars i { transition: transform .2s, opacity .2s; }
+  .site-header.is-menu-open .menu-toggle__bars i:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .site-header.is-menu-open .menu-toggle__bars i:nth-child(2) { opacity: 0; }
+  .site-header.is-menu-open .menu-toggle__bars i:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* --- FV並び替え：job tagとは → クイックリンク → 使ってみよう… --- */
+  .flow { display: flex; flex-direction: column; }  /* モバイルのみflex化して並び替え */
+  .about { order: -1; }                             /* job tagとはを先頭へ */
+  .about .panel { display: flex; flex-direction: column; }  /* CTAをカードの上へ */
+  /* 説明文：SPでは強制改行を無効化して両端揃え */
+  .about__desc { margin-bottom: 30px; text-align: justify; line-height: 27px;}
+  .about__desc br { display: none; }
+  .about__cta { order: 1; margin-top: 0; margin-bottom: 0; display: flex; flex-direction: column; align-items: center; }
+  /* SPのみ：新規登録・ログインボタンのスタイル */
+  .about__cta .btn {
+    position: relative;              /* 矢印を右端に絶対配置するための基準 */
+    display: flex;
+    width: 278px;                    /* ボタン幅278px */
+    max-width: 100%;
+    height: 54px;                    /* ボタン高さ54px */
+    padding: 0 40px;
+    justify-content: center;         /* テキストは中央のまま */
+    align-items: center;
+    gap: 8px;
+    align-self: center;              /* 中央に配置（全幅ストレッチをやめる） */
+    border-radius: 60px;
+    background: #0568D3;
+  }
+  .about__cta .btn .chev {           /* 矢印を右端から20pxに固定 */
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .about__cta-note {                 /* SPのみ：ログイン案内文のスタイル */
+    margin-bottom: 10px;             /* 注記→ボタン 10px */
+    color: #0568D3;
+    text-align: center;
+    font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+    letter-spacing: 2.8px;
+  }
+  .feature-grid { order: 2; margin-top: 30px; gap: 16px; }  /* ボタン→カード30px・カード間16px */
+
+  /* --- モバイルの特徴カード：横並び（マスコット左＋タイトル右、説明は非表示） --- */
+  .feature-card {
+    display: flex; flex-direction: row; align-items: center;
+    gap: 14px; padding: 16px 18px; text-align: left;
+    border-width: 2px;   /* SPのみ：ボーダー 4px→2px */
+  }
+  .feature-card__img { height: auto; width: 52px; flex: 0 0 52px; margin-bottom: 0; }
+  .feature-card__img img { max-height: 52px; }
+  .feature-card__title { margin: 0; font-size: 15px; line-height: 1.4; letter-spacing: -.02em; text-align: left; }
+  .feature-card__text { display: none; }
+
+  /* 本文の字間を詰める（全体的に） */
+  body { letter-spacing: 0; }
+  .about__desc, .usecase-card__body, .biz-card__text, .cat-card__body p { letter-spacing: -.01em; }
+
+  /* 大きめCTAボタンはSP版のみ16px（折り返し防止） */
+  .btn { font-size: 16px; padding: 18px 28px; }
+
+  /* クイックリンク：上下15px（隣接する白背景セクション15pxと合わせ実質30px間隔） */
+  .quicklinks { padding-block: 15px; }
+  /* クイックリンク：縦並び・横2列 */
+  .quicklinks__list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 12px; padding: 20px 18px; }
+  .quicklinks__list a { justify-content: flex-start; }
+
+  /* 使ってみよう3色ボックス：SPはアイコン非表示・文字のみ */
+  .usecase-card__head .ico,
+  .usecase-card__ico { display: none; }
+  .usecase-card__head { padding: 20px 20px 18px; }
+
+  /* 見出しの大きさをモバイル向けに */
+  .about__head img { height: 56px; }
+  .about__head b { font-size: 26px; }
+  .mascot-nav__title { font-size: 22px; }
+  .mascot-nav__title .name { font-size: 28px; }
+
+
+  .floaters { right: 12px; bottom: 14px; }
+  .floater { width: 73px; height: 73px; }   /* SPも同サイズ73pxに統一 */
+
+  /* ============ 追加のSP調整 ============ */
+
+  /* ヘッダー：ハンバーガーを確実に表示（青） */
+  /* ハンバーガーを確実に表示（青の線アイコン） */
+  .menu-toggle { color: var(--c-primary); display: inline-flex; align-items: center; }
+  .menu-toggle .menu-toggle__bars { gap: 6px; }   /* SP：バー間隔6px */
+  .menu-toggle .arrow { display: none; }   /* 下矢印はSPで非表示（後勝ち再表示を防止） */
+
+  /* クイックリンク（使ってみよう〜ニュース）：2列 / 文字 #221A16・16px・400・lh24 / 行間5・列間15 */
+  .quicklinks__list {
+    display: grid; grid-template-columns: 1fr 1fr;
+    column-gap: 15px; row-gap: 5px; padding: 16px;
+  }
+  .quicklinks__list a {
+    justify-content: flex-start; gap: 6px;
+    color: #221A16; font-size: 16px; font-weight: 400; line-height: 1.4;
+    letter-spacing: -.02em; text-decoration: none; white-space: nowrap;
+  }
+  .quicklinks__list a::before { flex: 0 0 auto; }
+
+  /* 使ってみよう3色ボックス：タイトル 白/18px/700/中央。枠のはみ出し防止（headは角丸なし＋cardのoverflowで丸める） */
+  .usecase-card { border-radius: 28px; }
+  .usecase-card__head { border-radius: 0; }
+  .usecase-card__head h3 { font-size: 18px; font-weight: 700; color: #FFF; text-align: center; }
+
+  /* 動画/活用ガイド バナー（SP指定） */
+  .banner-box__text {
+    color: #007BFF;
+    text-align: center;
+    font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%;   /* 23.4px */
+    letter-spacing: normal;
+  }
+  .banner-box {
+    display: flex;
+    padding: 15px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+    border-radius: 24px;
+    border: 2px solid var(--primary, #0568D3);
+  }
+  .banner-box__yt img { width: 50px; }
+  .banner-box__mascot img { width: 46px; height: 63px; }   /* SP：46×63px */
+  .banner-box__thumb img { max-height: 64px; }
+
+  /* 職業を調べてみよう：青帯（見出し・上15/見出し→検索10/検索→下15） */
+  .explore__search { padding: 15px 18px; }
+  .explore__search h2 { margin-bottom: 10px; }
+
+  /* SPのみ：4つのセクション見出しを 25px / 700 / line-height150% に統一（色は各セクションのまま） */
+  .sec-title,               /* 使ってみよう（黒）・自己診断ツール(青)・企業の方向けツール(青) */
+  .explore__search h2 {     /* 職業を調べてみよう（白） */
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+  }
+  /* 使ってみよう：上32px／見出し→リード10px／リード→カード24px（SP・このセクションのみ） */
+  .usecase .panel { padding-top: 32px; }
+  .usecase .sec-title { margin-bottom: 10px; }
+  .usecase .sec-lead { margin-bottom: 24px; }
+  /* 検索窓：白ピル・虫眼鏡を左・内側余白8/15px・虫眼鏡→文字5px（画像1/2） */
+  .explore__search .searchbox { height: auto; max-width: none; padding: 8px 15px; border-color: #fff; }
+  .explore__search .searchbox__submit { order: -1; flex: none; width: 24px; height: 24px; margin-right: 5px; color: var(--c-primary); }
+  .explore__search .searchbox input { font-size: 15px; }
+  /* 「色々な切り口から検索」青ボタンはSPでは非表示 */
+  .explore__more { display: none; }
+  /* カテゴリカード：横3列・縦積み（アイコン上・文字下）、説明は非表示、左右20/下20 */
+  .explore__grid { grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 20px 20px 20px; }
+  .cat-card {
+    flex-direction: column; align-items: center; text-align: center;
+    gap: 10px; padding: 10px 10px 10px; min-height: 0;
+  }
+  .cat-card__icon { width: 38px; height: 38px; }
+  .cat-card__icon img { width: 38px; height: 38px; }
+  .cat-card__body h3 { font-size: 14px; text-align: center; line-height: 1.35; }
+  .cat-card__body p { display: none; }
+
+  /* 自己診断ツール↔企業向けツールの間隔を30pxに（30+30=60→15+15=30。他セクションの間隔は不変） */
+  .diagnosis.section { padding-bottom: 15px; }
+  .biz.section { padding-top: 15px; }
+
+  /* 企業の方向けツール：上30px／見出し→カード24px（SP・このセクションのみ・リードなし） */
+  .biz .panel { padding-top: 30px; }
+  .biz .sec-title { margin-bottom: 24px; }
+
+  /* 自己診断ツール：上30px／見出し→リード10px／リード→カード24px（SP・このセクションのみ） */
+  .diagnosis .panel { padding-top: 30px; }
+  .diagnosis .sec-title { margin-bottom: 10px; }
+  /* 「自己診断ツール一覧はこちら」：青いテキストリンク・右寄せ（塗りボタンをやめる） */
+  .diagnosis .section__more { text-align: right; margin-top: 24px; }   /* カード → リンク 24px */
+  .diagnosis .section__more .btn {
+    display: inline-flex;
+    width: auto;
+    padding: 0;
+    gap: 5px;                       /* テキスト → 矢印 5px */
+    background: none;
+    border-radius: 0;
+    color: #0568D3;
+    font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 16px;              /* 100% */
+    letter-spacing: normal;
+  }
+  .diagnosis .section__more .btn:hover { background: none; transform: none; }
+  .diagnosis .sec-lead { margin-bottom: 24px; font-size: 16px; line-height: 1.6; letter-spacing: -.04em; }
+  .diag-card { padding: 24px 20px; }
+  .diag-card__img { height: auto; margin-bottom: 25px; }
+  .diag-card__img img { max-height: 110px; max-width: 170px; }
+  .diag-card__title { margin: 0 0 24px; font-size: 20px; white-space: nowrap; }
+  .diag-card__title .q { font-size: 20px; }
+
+  /* カテゴリカードのタイトル（青文字本文）：SPは12px。ラベルはSP用に切替 */
+  .cat-card__body h3 { font-size: 12px; }
+  .pc-label { display: none; }
+  .sp-label { display: inline; }
+  .sp-br { display: inline; }
+  .pc-br { display: none; }   /* SPではPC用改行を無効化 */
+  .sp-hide { display: none; }   /* SPでは非表示（例：リードの読点） */
+  .sp-only { display: inline; }   /* SPでのみ表示（例：「はこちら」） */
+
+  /* 企業の方向けツール：画像・文字・ボタンを縦並び（画像3の間隔） */
+  .biz-card { padding: 24px; text-align: center; }
+  .biz-card__head { flex-direction: column; align-items: center; gap: 25px; margin-bottom: 24px; }
+  .biz-card__head img { width: 130px; }
+  .biz-card__head h3 { text-align: center; }
+  .biz-card__btn { margin-top: 0; }
+  /* 企業向け・自己診断カードのボタン：矢印を右端から14pxに固定・テキストは中央 */
+  .diag-card__btn,
+  .biz-card__btn { position: relative; justify-content: center; padding-block: 17px; }   /* SP：縦padding 17px */
+  .diag-card__btn .chev,
+  .biz-card__btn .chev { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); }
+
+  /* 青ボタン・一覧誘導リンク：16px / 700 / lh100%（色はそのまま） */
+  .diag-card__btn,
+  .ranking__more a,
+  .news__more-link,
+  .links__more a { font-size: 16px; font-weight: 700; line-height: 16px; }
+  .links__more { text-align: right; margin-top: 32px; }   /* SPのみ：右詰め／ドット→リンク 32px */
+
+  /* 企業向けツール：説明文を省いて文字量を減らす */
+  .biz-card__text { display: none; }
+  .biz-card__head h3 { line-height: 160%; }
+}
+
+/* ==== TOPランキング：640px未満は1列（640〜1150pxは2列＝@media max-width:1150px に集約） ==== */
+@media (max-width: 639.98px) {
+  .rank-grid { grid-template-columns: 1fr; }
+}

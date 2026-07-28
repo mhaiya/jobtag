@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>職業アクセスランキング | job tag（職業情報提供サイト）リニューアルデザイン</title>
+  <meta name="description" content="本サイトのアクセス履歴を元に集計された、閲覧数上位100件の職業一覧です。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- 共通トークン・フッター・フローターは style.css を、ページ固有は ranking.css を使用 -->
+  <link rel="stylesheet" href="css/style.css?v=20260730">
+  <link rel="stylesheet" href="css/ranking.css?v=20260730">
+</head>
+<body>
+
+  <!-- ========================================================================
+       アイコンスプライト（stroke/fill=currentColor で色継承）
+       ======================================================================== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></g></symbol>
+      <symbol id="i-user" viewBox="0 0 18 18.06"><circle cx="9" cy="5" r="5" fill="currentColor"/><path fill="currentColor" d="M0 18.06 A9 6.53 0 0 1 18 18.06 Z"/></symbol>
+      <symbol id="i-chev-right" viewBox="0 0 6.5 11"><path d="M1 10L5.5 5.5L1 1" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-chev-left" viewBox="0 0 6.5 11"><path d="M5.5 1L1 5.5L5.5 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-chev-up" viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-chev-down" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <!-- トロフィー（1〜3位。色は rk-c--N を継承） -->
+      <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M12 15C8.68629 15 6 12.3137 6 9V3.44444C6 3.0306 6 2.82367 6.06031 2.65798C6.16141 2.38021 6.38021 2.16141 6.65798 2.06031C6.82367 2 7.0306 2 7.44444 2H16.5556C16.9694 2 17.1763 2 17.342 2.06031C17.6198 2.16141 17.8386 2.38021 17.9397 2.65798C18 2.82367 18 3.0306 18 3.44444V9C18 12.3137 15.3137 15 12 15ZM12 15V18M18 4H20.5C20.9659 4 21.1989 4 21.3827 4.07612C21.6277 4.17761 21.8224 4.37229 21.9239 4.61732C22 4.80109 22 5.03406 22 5.5V6C22 6.92997 22 7.39496 21.8978 7.77646C21.6204 8.81173 20.8117 9.62038 19.7765 9.89778C19.395 10 18.93 10 18 10M6 4H3.5C3.03406 4 2.80109 4 2.61732 4.07612C2.37229 4.17761 2.17761 4.37229 2.07612 4.61732C2 4.80109 2 5.03406 2 5.5V6C2 6.92997 2 7.39496 2.10222 7.77646C2.37962 8.81173 3.18827 9.62038 4.22354 9.89778C4.60504 10 5.07003 10 6 10M7.44444 22H16.5556C16.801 22 17 21.801 17 21.5556C17 19.5919 15.4081 18 13.4444 18H10.5556C8.59188 18 7 19.5919 7 21.5556C7 21.801 7.19898 22 7.44444 22Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <!-- 二重矢印（順位変動。下降はCSSで180°回転） -->
+      <symbol id="i-arrow-move" viewBox="0 0 24 24"><path d="M7.4 5.6L6 7L12 13L18 7L16.6 5.6L12 10.175L7.4 5.6ZM7.4 11.6L6 13L12 19L18 13L16.6 11.6L12 16.175L7.4 11.6Z" fill="currentColor"/></symbol>
+      <!-- チェック丸（4位以降） -->
+      <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.6 2.6L16 9.4"/></g></symbol>
+    </defs>
+  </svg>
+
+
+  <!-- ========================================================================
+       固定ヘッダー（トップページと共通）：ユーティリティバー〜グローバルナビ
+       ======================================================================== -->
+  <div class="site-header">
+
+  <!-- 04. ユーティリティバー -->
+  <div class="utilbar">
+    <div class="container utilbar__inner">
+      <div class="utilbar__group">
+        <span class="utilbar__label">文字サイズ</span>
+        <div class="fontsize" role="group" aria-label="文字サイズ切替">
+          <button type="button" class="is-active">標準</button>
+          <button type="button">大</button>
+          <button type="button">特大</button>
+        </div>
+      </div>
+      <div class="utilbar__group">
+        <span class="utilbar__label">サイト閲覧支援ツール起動</span>
+        <img class="utilbar__help" src="img/ranking/help_icon.svg" alt="ヘルプ" width="22" height="22">
+      </div>
+      <div class="utilbar__spacer"></div>
+      <div class="utilbar__mhlw">
+        <img src="img/ranking/mhlw_logo.png" alt="厚生労働省">
+      </div>
+    </div>
+  </div>
+
+  <!-- 05. ヘッダー -->
+  <header class="header">
+    <div class="container header__inner">
+      <a class="header__logo" href="https://shigoto.mhlw.go.jp/User" aria-label="job tag トップへ">
+        <img src="img/ranking/logo_lockup.png" alt="職業情報提供サイト job tag">
+      </a>
+
+      <img class="header__mhlw" src="img/ranking/mhlw_logo.png" alt="厚生労働省">
+
+      <div class="header__search-drop">
+        <form class="searchbox" role="search" action="https://shigoto.mhlw.go.jp/User/Search/Freeword" method="get">
+          <input type="text" name="keyword" placeholder="フリーワードで職業を検索（例：エンジニア）" aria-label="職業をフリーワードで検索">
+          <button type="submit" class="searchbox__submit" aria-label="検索"><svg class="ico"><use href="#i-search"/></svg></button>
+          <button type="button" class="searchbox__clear" aria-label="入力をクリア"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="18" y1="6" x2="6" y2="18" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg></button>
+        </form>
+        <button type="button" class="header__search-close" aria-label="検索を閉じる"><svg class="ico"><use href="#i-chev-up"/></svg></button>
+      </div>
+
+      <a class="mylist" href="https://shigoto.mhlw.go.jp/Account/Update/Information" aria-label="マイリスト">
+        <img src="img/ranking/star.svg" alt="">
+        <span>マイリスト</span>
+      </a>
+
+      <button type="button" class="header__search-toggle" id="searchToggle" aria-label="検索" aria-expanded="false">
+        <svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      </button>
+
+      <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="gnav">
+        <span class="menu-toggle__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="menu-toggle__label">メニュー</span>
+        <svg class="ico arrow" aria-hidden="true"><use href="#i-chev-down"/></svg>
+      </button>
+
+      <a class="btn-login" href="https://shigoto.mhlw.go.jp/Auth/Login">
+        <svg class="ico" aria-hidden="true"><use href="#i-user"/></svg> 新規登録・ログイン
+      </a>
+    </div>
+  </header>
+
+  <!-- 06. グローバルナビ -->
+  <nav class="gnav" id="gnav" aria-label="グローバルナビゲーション">
+    <div class="container">
+      <ul class="gnav__list">
+        <li><a href="https://shigoto.mhlw.go.jp/User/about">当サイトについて</a></li>
+        <li><a href="https://shigoto.mhlw.go.jp/User/TutorialVideos">使い方動画</a></li>
+
+        <li class="gnav__item has-sub">
+          <a role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">自己診断ツール</a>
+          <ul class="gnav__sub">
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Top">職業興味検査 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Top">仕事価値観検査 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/GTest/Introduction/Part1">職業適性テスト（Gテスト） <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/MyProfile/Step1">しごと能力プロフィール <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/VocationalAbilityDiagnosticTool/Step1">ポータブルスキル見える化ツール <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Career/Step1">キャリア分析 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/AbilityCheck">職業能力チェック <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+          </ul>
+        </li>
+
+        <li class="gnav__item has-sub">
+          <a role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">職業検索</a>
+          <ul class="gnav__sub">
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Freeword">フリーワードで検索 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Theme">テーマで検索 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Scene">イメージ検索（地図） <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Nature">仕事の性質で検索 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/WorkActivity">仕事の内容で検索 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Knowledge">スキル・知識などで検索 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Top">免許・資格で検索 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Top">職種カテゴリーで検索 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Top">産業で検索 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Top">職業分類で検索 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/OccupationsEasy">未経験でも比較的入りやすい職業 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/TaskWord">タスクで検索 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/SearchBySalaryAndRatioJob">賃金・求人倍率で検索 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+          </ul>
+        </li>
+
+        <li class="gnav__item has-sub">
+          <a role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">業種・職種を知る</a>
+          <ul class="gnav__sub">
+            <li><a href="https://shigoto.mhlw.go.jp/User/OfficeOccupations">事務 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/SaleOccupations">営業 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/ITOccupations">IT・通信 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/FinancialOccupations">金融 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/MedicalOccupations">医療・看護 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/OccupationsLongTermCare">介護 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/ConstructionOccupations">土木・建築 <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/OccupationsRarely">B to B（企業間取引） <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/BtoC">B to C（消費者取引） <svg class="ico" aria-hidden="true"><use href="#i-chev-right"/></svg></a></li>
+          </ul>
+        </li>
+
+        <li class="gnav__sp"><a href="https://shigoto.mhlw.go.jp/User/Search/Top">色々な切り口から検索</a></li>
+        <li><a href="https://shigoto.mhlw.go.jp/User/links">リンク集</a></li>
+        <li><a href="https://shigoto.mhlw.go.jp/User/faq">よくあるお問い合わせ</a></li>
+        <li class="gnav__sp gnav__mylist"><a href="https://shigoto.mhlw.go.jp/Account/Update/Information"><span class="gnav__star"><img src="img/ranking/star.svg" alt=""></span>マイリスト</a></li>
+        <li class="gnav__sp gnav__support"><a href="#"><span>サイト閲覧支援ツール起動</span> <img class="gnav__help" src="img/ranking/help_icon.svg" alt="ヘルプ"></a></li>
+      </ul>
+      <div class="gnav__actions">
+        <a class="gnav-btn gnav-btn--login" href="https://shigoto.mhlw.go.jp/Auth/Login">ログイン <svg class="ico chev" aria-hidden="true"><use href="#i-chev-right"/></svg></a>
+        <a class="gnav-btn gnav-btn--register" href="https://shigoto.mhlw.go.jp/Auth/Register/Step1">新規登録 <svg class="ico chev" aria-hidden="true"><use href="#i-chev-right"/></svg></a>
+      </div>
+    </div>
+  </nav>
+
+  </div><!-- /.site-header -->
+
+
+  <!-- ========================================================================
+       本文
+       ======================================================================== -->
+  <main>
+    <div class="container">
+      <!-- パンくず -->
+      <nav class="rk-breadcrumb" aria-label="パンくず">
+        <a href="index.html">TOP</a><span class="sep" aria-hidden="true">＞</span>職業アクセスランキング
+      </nav>
+
+      <section class="rk-section">
+        <h1 class="rk-title">職業アクセスランキング</h1>
+        <p class="rk-lead">本サイトのアクセス履歴を元に集計された、閲覧数上位100件の職業一覧です。</p>
+
+        <div class="rk-panel">
+          <!-- タブ -->
+          <div class="rk-tabs" role="tablist" aria-label="ランキング期間切替">
+            <button type="button" class="rk-tabs__btn is-active" role="tab" data-tab="weekly" aria-selected="true" aria-controls="rkList"><span class="pc-label">週間ランキング</span><span class="sp-label">週間</span></button>
+            <span class="rk-tabs__sep" aria-hidden="true">|</span>
+            <button type="button" class="rk-tabs__btn" role="tab" data-tab="monthly" aria-selected="false" aria-controls="rkList"><span class="pc-label">月間ランキング</span><span class="sp-label">月間</span></button>
+            <span class="rk-tabs__sep" aria-hidden="true">|</span>
+            <button type="button" class="rk-tabs__btn" role="tab" data-tab="yearly" aria-selected="false" aria-controls="rkList"><span class="pc-label">年間ランキング</span><span class="sp-label">年間</span></button>
+          </div>
+
+          <!-- カード（JSが data/ranking-full.json から fetch して描画） -->
+          <ul class="rk-list" id="rkList" role="tabpanel" aria-live="polite">
+            <li class="rk-loading">ランキングを読み込み中…</li>
+          </ul>
+
+          <!-- ページネーション（JSが描画） -->
+          <nav class="rk-pager" id="rkPager" aria-label="ページ送り"></nav>
+        </div>
+      </section>
+    </div>
+  </main>
+
+
+  <!-- ========================================================================
+       フッター（トップページと同一）
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__brand-logo">
+            <img src="img/ranking/footer_logo.png" alt="職業情報提供サイト job tag">
+          </div>
+          <p class="footer__brand-text">職業について、内容、就労する方法、求められる知識・スキルや、どのような人が向いているかなどが総合的にわかるサイトです</p>
+          <a class="footer__brand-btn" href="https://shigoto.mhlw.go.jp/User/about"><svg class="footer__brand-btn-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#fff" d="M12.8375 17.6375C13.0792 17.3958 13.2 17.1 13.2 16.75C13.2 16.4 13.0792 16.1042 12.8375 15.8625C12.5958 15.6208 12.3 15.5 11.95 15.5C11.6 15.5 11.3042 15.6208 11.0625 15.8625C10.8208 16.1042 10.7 16.4 10.7 16.75C10.7 17.1 10.8208 17.3958 11.0625 17.6375C11.3042 17.8792 11.6 18 11.95 18C12.3 18 12.5958 17.8792 12.8375 17.6375ZM11.05 14.15H12.9C12.9 13.6 12.9625 13.1667 13.0875 12.85C13.2125 12.5333 13.5667 12.1 14.15 11.55C14.5833 11.1167 14.925 10.7042 15.175 10.3125C15.425 9.92083 15.55 9.45 15.55 8.9C15.55 7.96667 15.2083 7.25 14.525 6.75C13.8417 6.25 13.0333 6 12.1 6C11.15 6 10.3792 6.25 9.7875 6.75C9.19583 7.25 8.78333 7.85 8.55 8.55L10.2 9.2C10.2833 8.9 10.4708 8.575 10.7625 8.225C11.0542 7.875 11.5 7.7 12.1 7.7C12.6333 7.7 13.0333 7.84583 13.3 8.1375C13.5667 8.42917 13.7 8.75 13.7 9.1C13.7 9.43333 13.6 9.74583 13.4 10.0375C13.2 10.3292 12.95 10.6 12.65 10.85C11.9167 11.5 11.4667 11.9917 11.3 12.325C11.1333 12.6583 11.05 13.2667 11.05 14.15ZM12 22C10.6167 22 9.31667 21.7375 8.1 21.2125C6.88333 20.6875 5.825 19.975 4.925 19.075C4.025 18.175 3.3125 17.1167 2.7875 15.9C2.2625 14.6833 2 13.3833 2 12C2 10.6167 2.2625 9.31667 2.7875 8.1C3.3125 6.88333 4.025 5.825 4.925 4.925C5.825 4.025 6.88333 3.3125 8.1 2.7875C9.31667 2.2625 10.6167 2 12 2C13.3833 2 14.6833 2.2625 15.9 2.7875C17.1167 3.3125 18.175 4.025 19.075 4.925C19.975 5.825 20.6875 6.88333 21.2125 8.1C21.7375 9.31667 22 10.6167 22 12C22 13.3833 21.7375 14.6833 21.2125 15.9C20.6875 17.1167 19.975 18.175 19.075 19.075C18.175 19.975 17.1167 20.6875 15.9 21.2125C14.6833 21.7375 13.3833 22 12 22ZM12 20C14.2333 20 16.125 19.225 17.675 17.675C19.225 16.125 20 14.2333 20 12C20 9.76667 19.225 7.875 17.675 6.325C16.125 4.775 14.2333 4 12 4C9.76667 4 7.875 4.775 6.325 6.325C4.775 7.875 4 9.76667 4 12C4 14.2333 4.775 16.125 6.325 17.675C7.875 19.225 9.76667 20 12 20Z"/></svg> 職業情報提供サイトって何？</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>適職を知る</h4>
+          <ul>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Top">職業興味検査</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Top">仕事価値観検査</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/GTest/Introduction/Part1">職業適性テスト（Gテスト）</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/MyProfile/Step1">しごと能力プロフィール</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/VocationalAbilityDiagnosticTool/Step1">ポータブルスキル見える化ツール</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Career/Step1">キャリア分析</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/AbilityCheck">職業能力チェック</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4>職業を検索する</h4>
+          <ul>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Freeword">フリーワードで検索</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Theme">テーマで検索</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Scene">イメージ検索（地図）</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Nature">仕事の性質で検索</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/WorkActivity">仕事の内容で検索</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Knowledge">スキル・知識などで検索</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Top">免許・資格で検索</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Top">職種カテゴリーで検索</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Top">産業で検索</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/Top">職業分類で検索</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/OccupationsEasy">未経験でも比較的入りやすい職業</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/TaskWord">タスクで検索</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Search/SearchBySalaryAndRatioJob">賃金・求人倍率で検索</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4>企業向け支援ツール</h4>
+          <ul>
+            <li><a href="https://shigoto.mhlw.go.jp/User/about">企業での利用</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Adopition/Step1">人材採用要件整理</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/TaskOrganization/Step1">タスク整理</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/Simulation/Step1">人材活用シミュレーション</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__row2">
+        <div><!-- ブランド列と幅を合わせる空きカラム --></div>
+        <div class="footer__col">
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="https://shigoto.mhlw.go.jp/Account/Update/Information">マイリスト</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/download">職業情報ダウンロード</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>ピックアップ</h4>
+          <ul>
+            <li><a href="https://shigoto.mhlw.go.jp/User/info/list">ニュース</a></li>
+            <li><a href="ranking.html">職業アクセスランキング</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>その他</h4>
+          <ul>
+            <li><a href="https://shigoto.mhlw.go.jp/User/about">個人での利用</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/about">支援者としての利用</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/about">当サイトについて</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/TutorialVideos">サイトの使い方動画</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User">job tag活用ガイドなど</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/links">リンク集</a></li>
+            <li><a href="https://shigoto.mhlw.go.jp/User/faq">よくある質問</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container">
+        <div class="footer__bottom-inner">
+          <a href="https://shigoto.mhlw.go.jp/User/about">当サイトについて</a>
+          <a href="https://shigoto.mhlw.go.jp/User/howto">利用方法</a>
+          <a href="https://shigoto.mhlw.go.jp/User/links">リンク集</a>
+          <a href="https://shigoto.mhlw.go.jp/User/accessibility">アクセシビリティについて</a>
+          <a href="https://shigoto.mhlw.go.jp/User/sitemap">サイトマップ</a>
+          <a href="https://shigoto.mhlw.go.jp/User/privacy">プライバシーポリシー</a>
+          <a href="https://shigoto.mhlw.go.jp/User/tos">利用規約</a>
+        </div>
+        <p class="footer__copyright">© Ministry of Health, Labour and Welfare.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- 追従UI（アンケート / PAGE TOP）※トップと同一 -->
+  <div class="floaters">
+    <a class="floater -survey" href="#"><img class="floater__ico" src="img/ranking/questionnaire.png" alt="">アンケート</a>
+    <button class="floater" id="pageTop" type="button" aria-label="ページ上部へ戻る">
+      <svg class="ico" aria-hidden="true"><use href="#i-chev-up"/></svg>PAGE<br>TOP
+    </button>
+  </div>
+
+  <script src="js/utils.js?v=20260730"></script>
+  <script src="js/main.js?v=20260730"></script>
+  <script src="js/ranking.js?v=20260730"></script>
+</body>
+</html>

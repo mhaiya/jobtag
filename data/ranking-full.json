@@ -1,0 +1,2122 @@
+{
+  "updatedAt": "2026-07-21",
+  "note": "職業アクセスランキング（上位100件/期間）。本家データ接続時はこのJSONを差し替えるか、js/ranking.js の RANKING_API.url をAPIエンドポイントに変更（同形式JSONを返す想定）。move: up=上昇/down=下降/stay=変動なし。image=職業写真パス。url=職業詳細ページ。",
+  "perPage": 12,
+  "periods": {
+    "weekly": {
+      "label": "週間ランキング",
+      "items": [
+        {
+          "rank": 1,
+          "title": "Webデザイナー",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 2,
+          "title": "CADオペレーター",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 3,
+          "title": "一般事務",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 4,
+          "title": "児童相談所相談員",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 5,
+          "title": "グラフィックデザイナー",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 6,
+          "title": "地方公務員（行政事務）",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 7,
+          "title": "看護師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 8,
+          "title": "キャリアカウンセラー/キャリアコンサルタント",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 9,
+          "title": "児童指導員",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 10,
+          "title": "臨床検査技師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 11,
+          "title": "動物園飼育員",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 12,
+          "title": "プログラマー",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 13,
+          "title": "システムエンジニア",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 14,
+          "title": "保育士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 15,
+          "title": "営業",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 16,
+          "title": "介護職員",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 17,
+          "title": "理学療法士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 18,
+          "title": "作業療法士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 19,
+          "title": "栄養士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 20,
+          "title": "薬剤師",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 21,
+          "title": "歯科衛生士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 22,
+          "title": "保健師",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 23,
+          "title": "社会福祉士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 24,
+          "title": "精神保健福祉士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 25,
+          "title": "幼稚園教諭",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 26,
+          "title": "小学校教諭",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 27,
+          "title": "電気工事士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 28,
+          "title": "自動車整備士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 29,
+          "title": "建築士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 30,
+          "title": "土木施工管理技士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 31,
+          "title": "大工",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 32,
+          "title": "調理師",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 33,
+          "title": "パティシエ",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 34,
+          "title": "美容師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 35,
+          "title": "理容師",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 36,
+          "title": "ネイリスト",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 37,
+          "title": "販売員",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 38,
+          "title": "経理事務",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 39,
+          "title": "人事事務",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 40,
+          "title": "総務事務",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 41,
+          "title": "Webエンジニア",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 42,
+          "title": "データサイエンティスト",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 43,
+          "title": "ネットワークエンジニア",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 44,
+          "title": "カスタマーサポート",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 45,
+          "title": "翻訳者",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 46,
+          "title": "編集者",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 47,
+          "title": "ライター",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 48,
+          "title": "カメラマン",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 49,
+          "title": "イラストレーター",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 50,
+          "title": "建築設計技術者",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 51,
+          "title": "機械設計技術者",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 52,
+          "title": "品質管理",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 53,
+          "title": "生産管理",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 54,
+          "title": "購買担当",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 55,
+          "title": "マーケティング",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 56,
+          "title": "広報",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 57,
+          "title": "コールセンターオペレーター",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 58,
+          "title": "ホテルフロント",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 59,
+          "title": "ツアーコンダクター",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 60,
+          "title": "バス運転手",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 61,
+          "title": "トラック運転手",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 62,
+          "title": "警備員",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 63,
+          "title": "システムエンジニア",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 64,
+          "title": "保育士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 65,
+          "title": "営業",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 66,
+          "title": "介護職員",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 67,
+          "title": "理学療法士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 68,
+          "title": "作業療法士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 69,
+          "title": "栄養士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 70,
+          "title": "薬剤師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 71,
+          "title": "歯科衛生士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 72,
+          "title": "保健師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 73,
+          "title": "社会福祉士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 74,
+          "title": "精神保健福祉士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 75,
+          "title": "幼稚園教諭",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 76,
+          "title": "小学校教諭",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 77,
+          "title": "電気工事士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 78,
+          "title": "自動車整備士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 79,
+          "title": "建築士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 80,
+          "title": "土木施工管理技士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 81,
+          "title": "大工",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 82,
+          "title": "調理師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 83,
+          "title": "パティシエ",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 84,
+          "title": "美容師",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 85,
+          "title": "理容師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 86,
+          "title": "ネイリスト",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 87,
+          "title": "販売員",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 88,
+          "title": "経理事務",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 89,
+          "title": "人事事務",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 90,
+          "title": "総務事務",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 91,
+          "title": "Webエンジニア",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 92,
+          "title": "データサイエンティスト",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 93,
+          "title": "ネットワークエンジニア",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 94,
+          "title": "カスタマーサポート",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 95,
+          "title": "翻訳者",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 96,
+          "title": "編集者",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 97,
+          "title": "ライター",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 98,
+          "title": "カメラマン",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 99,
+          "title": "イラストレーター",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 100,
+          "title": "建築設計技術者",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        }
+      ]
+    },
+    "monthly": {
+      "label": "月間ランキング",
+      "items": [
+        {
+          "rank": 1,
+          "title": "一般事務",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 2,
+          "title": "Webデザイナー",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 3,
+          "title": "システムエンジニア",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 4,
+          "title": "CADオペレーター",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 5,
+          "title": "保育士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 6,
+          "title": "看護師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 7,
+          "title": "プログラマー",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 8,
+          "title": "グラフィックデザイナー",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 9,
+          "title": "介護職員",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 10,
+          "title": "薬剤師",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 11,
+          "title": "営業",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 12,
+          "title": "児童指導員",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 13,
+          "title": "システムエンジニア",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 14,
+          "title": "保育士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 15,
+          "title": "営業",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 16,
+          "title": "介護職員",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 17,
+          "title": "理学療法士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 18,
+          "title": "作業療法士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 19,
+          "title": "栄養士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 20,
+          "title": "薬剤師",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 21,
+          "title": "歯科衛生士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 22,
+          "title": "保健師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 23,
+          "title": "社会福祉士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 24,
+          "title": "精神保健福祉士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 25,
+          "title": "幼稚園教諭",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 26,
+          "title": "小学校教諭",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 27,
+          "title": "電気工事士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 28,
+          "title": "自動車整備士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 29,
+          "title": "建築士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 30,
+          "title": "土木施工管理技士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 31,
+          "title": "大工",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 32,
+          "title": "調理師",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 33,
+          "title": "パティシエ",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 34,
+          "title": "美容師",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 35,
+          "title": "理容師",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 36,
+          "title": "ネイリスト",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 37,
+          "title": "販売員",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 38,
+          "title": "経理事務",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 39,
+          "title": "人事事務",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 40,
+          "title": "総務事務",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 41,
+          "title": "Webエンジニア",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 42,
+          "title": "データサイエンティスト",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 43,
+          "title": "ネットワークエンジニア",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 44,
+          "title": "カスタマーサポート",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 45,
+          "title": "翻訳者",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 46,
+          "title": "編集者",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 47,
+          "title": "ライター",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 48,
+          "title": "カメラマン",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 49,
+          "title": "イラストレーター",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 50,
+          "title": "建築設計技術者",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 51,
+          "title": "機械設計技術者",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 52,
+          "title": "品質管理",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 53,
+          "title": "生産管理",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 54,
+          "title": "購買担当",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 55,
+          "title": "マーケティング",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 56,
+          "title": "広報",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 57,
+          "title": "コールセンターオペレーター",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 58,
+          "title": "ホテルフロント",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 59,
+          "title": "ツアーコンダクター",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 60,
+          "title": "バス運転手",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 61,
+          "title": "トラック運転手",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 62,
+          "title": "警備員",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 63,
+          "title": "システムエンジニア",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 64,
+          "title": "保育士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 65,
+          "title": "営業",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 66,
+          "title": "介護職員",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 67,
+          "title": "理学療法士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 68,
+          "title": "作業療法士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 69,
+          "title": "栄養士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 70,
+          "title": "薬剤師",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 71,
+          "title": "歯科衛生士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 72,
+          "title": "保健師",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 73,
+          "title": "社会福祉士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 74,
+          "title": "精神保健福祉士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 75,
+          "title": "幼稚園教諭",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 76,
+          "title": "小学校教諭",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 77,
+          "title": "電気工事士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 78,
+          "title": "自動車整備士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 79,
+          "title": "建築士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 80,
+          "title": "土木施工管理技士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 81,
+          "title": "大工",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 82,
+          "title": "調理師",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 83,
+          "title": "パティシエ",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 84,
+          "title": "美容師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 85,
+          "title": "理容師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 86,
+          "title": "ネイリスト",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 87,
+          "title": "販売員",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 88,
+          "title": "経理事務",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 89,
+          "title": "人事事務",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 90,
+          "title": "総務事務",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 91,
+          "title": "Webエンジニア",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 92,
+          "title": "データサイエンティスト",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 93,
+          "title": "ネットワークエンジニア",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 94,
+          "title": "カスタマーサポート",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 95,
+          "title": "翻訳者",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 96,
+          "title": "編集者",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 97,
+          "title": "ライター",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 98,
+          "title": "カメラマン",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 99,
+          "title": "イラストレーター",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 100,
+          "title": "建築設計技術者",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        }
+      ]
+    },
+    "yearly": {
+      "label": "年間ランキング",
+      "items": [
+        {
+          "rank": 1,
+          "title": "システムエンジニア",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 2,
+          "title": "一般事務",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 3,
+          "title": "Webデザイナー",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 4,
+          "title": "看護師",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 5,
+          "title": "営業",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 6,
+          "title": "プログラマー",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 7,
+          "title": "CADオペレーター",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 8,
+          "title": "保育士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 9,
+          "title": "介護職員",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 10,
+          "title": "グラフィックデザイナー",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 11,
+          "title": "薬剤師",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 12,
+          "title": "理学療法士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 13,
+          "title": "システムエンジニア",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 14,
+          "title": "保育士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 15,
+          "title": "営業",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 16,
+          "title": "介護職員",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 17,
+          "title": "理学療法士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 18,
+          "title": "作業療法士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 19,
+          "title": "栄養士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 20,
+          "title": "薬剤師",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 21,
+          "title": "歯科衛生士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 22,
+          "title": "保健師",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 23,
+          "title": "社会福祉士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 24,
+          "title": "精神保健福祉士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 25,
+          "title": "幼稚園教諭",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 26,
+          "title": "小学校教諭",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 27,
+          "title": "電気工事士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 28,
+          "title": "自動車整備士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 29,
+          "title": "建築士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 30,
+          "title": "土木施工管理技士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 31,
+          "title": "大工",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 32,
+          "title": "調理師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 33,
+          "title": "パティシエ",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 34,
+          "title": "美容師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 35,
+          "title": "理容師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 36,
+          "title": "ネイリスト",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 37,
+          "title": "販売員",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 38,
+          "title": "経理事務",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 39,
+          "title": "人事事務",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 40,
+          "title": "総務事務",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 41,
+          "title": "Webエンジニア",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 42,
+          "title": "データサイエンティスト",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 43,
+          "title": "ネットワークエンジニア",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 44,
+          "title": "カスタマーサポート",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 45,
+          "title": "翻訳者",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 46,
+          "title": "編集者",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 47,
+          "title": "ライター",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 48,
+          "title": "カメラマン",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 49,
+          "title": "イラストレーター",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 50,
+          "title": "建築設計技術者",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 51,
+          "title": "機械設計技術者",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 52,
+          "title": "品質管理",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 53,
+          "title": "生産管理",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 54,
+          "title": "購買担当",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 55,
+          "title": "マーケティング",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 56,
+          "title": "広報",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 57,
+          "title": "コールセンターオペレーター",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 58,
+          "title": "ホテルフロント",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 59,
+          "title": "ツアーコンダクター",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 60,
+          "title": "バス運転手",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 61,
+          "title": "トラック運転手",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 62,
+          "title": "警備員",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 63,
+          "title": "システムエンジニア",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 64,
+          "title": "保育士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 65,
+          "title": "営業",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 66,
+          "title": "介護職員",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 67,
+          "title": "理学療法士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 68,
+          "title": "作業療法士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 69,
+          "title": "栄養士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 70,
+          "title": "薬剤師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 71,
+          "title": "歯科衛生士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 72,
+          "title": "保健師",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 73,
+          "title": "社会福祉士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 74,
+          "title": "精神保健福祉士",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 75,
+          "title": "幼稚園教諭",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 76,
+          "title": "小学校教諭",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 77,
+          "title": "電気工事士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 78,
+          "title": "自動車整備士",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 79,
+          "title": "建築士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 80,
+          "title": "土木施工管理技士",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 81,
+          "title": "大工",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 82,
+          "title": "調理師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 83,
+          "title": "パティシエ",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 84,
+          "title": "美容師",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 85,
+          "title": "理容師",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 86,
+          "title": "ネイリスト",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 87,
+          "title": "販売員",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 88,
+          "title": "経理事務",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 89,
+          "title": "人事事務",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 90,
+          "title": "総務事務",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 91,
+          "title": "Webエンジニア",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 92,
+          "title": "データサイエンティスト",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 93,
+          "title": "ネットワークエンジニア",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 94,
+          "title": "カスタマーサポート",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 95,
+          "title": "翻訳者",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 96,
+          "title": "編集者",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 97,
+          "title": "ライター",
+          "move": "stay",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 98,
+          "title": "カメラマン",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 99,
+          "title": "イラストレーター",
+          "move": "up",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        },
+        {
+          "rank": 100,
+          "title": "建築設計技術者",
+          "move": "down",
+          "image": "img/assets/placeholder_photo.svg",
+          "url": "#"
+        }
+      ]
+    }
+  }
+}
