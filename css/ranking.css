@@ -133,7 +133,9 @@ main > .container { padding-inline: clamp(24px, 8vw, 80px); }
   /* 色は順位クラス（rk-c--1/2/3 = 金銀銅, rk-c--check = 青）で付与 */
 }
 /* 変動アイコン（上昇=#FFC000で上向き回転 / 下降=#B6B6B6で下向き / 変動なし=ダッシュ）※トップと同配色・同挙動 */
-.rk-move { flex: 0 0 auto; display: inline-flex; align-items: center; font-size: 20px; }
+/* 変動アイコンは幅を固定（矢印1em＝ダッシュ幅を揃える）。
+   これがないと stay(ダッシュ) の多い期間だけ職業名の開始位置がずれる */
+.rk-move { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 1em; font-size: 20px; }
 .rk-move .ico { width: 1em; height: 1em; fill: currentColor; }
 .rk-move.-up   { color: #FFC000; }
 .rk-move.-up .ico { transform: rotate(180deg); }
